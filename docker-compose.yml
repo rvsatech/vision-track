@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: visiontrack-postgres
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U visiontrack"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+    environment:
+      POSTGRES_USER: visiontrack
+      POSTGRES_PASSWORD: visiontrack
+      POSTGRES_DB: visiontrack
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    networks:
+      - visiontrack
+
+  api:
+    build:
+      context: ./server
+    container_name: visiontrack-api
+
+    env_file:
+      - .env
+
+    ports:
+      - "3001:3000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+    networks:
+      - visiontrack
+
+volumes:
+  postgres_data:
+
+networks:
+  visiontrack:
+    driver: bridge
