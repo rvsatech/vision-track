@@ -1,0 +1,292 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+//////////////////////////////////////////////////////
+// ENUMS
+//////////////////////////////////////////////////////
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum InspectionStatus {
+  PROCESSING
+  SUCCESS
+  FAILED
+}
+
+enum FeedbackType {
+  CORRECT
+  INCORRECT
+}
+
+//////////////////////////////////////////////////////
+// BILLING / SAAS CORE
+//////////////////////////////////////////////////////
+
+model Plan {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       Float
+  description String?
+
+  companies   Company[]
+  modules     PlanModule[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PlanModule {
+  id        Int @id @default(autoincrement())
+
+  planId    Int
+  moduleId  Int
+
+  plan      Plan   @relation(fields: [planId], references: [id])
+  module    Module @relation(fields: [moduleId], references: [id])
+
+  @@unique([planId, moduleId])
+}
+
+//////////////////////////////////////////////////////
+// TENANT
+//////////////////////////////////////////////////////
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  name        String
+  cnpj        String?  @unique
+
+  planId      Int?
+  plan        Plan?    @relation(fields: [planId], references: [id])
+
+  users       User[]
+  modules     CompanyModule[]
+  aiModels    AIModel[]
+
+  uploads     Upload[]
+  inspections Inspection[]
+  datasets    DatasetVersion[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([planId])
+}
+
+//////////////////////////////////////////////////////
+// AUTH
+//////////////////////////////////////////////////////
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  password    String
+  role        Role     @default(USER)
+
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  inspections Inspection[]
+  uploads     Upload[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+//////////////////////////////////////////////////////
+// PRODUCT (MÓDULOS)
+//////////////////////////////////////////////////////
+
+model Module {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+
+  companies   CompanyModule[]
+  aiModels    AIModel[]
+  planModules PlanModule[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CompanyModule {
+  id        Int @id @default(autoincrement())
+
+  companyId Int
+  moduleId  Int
+
+  company   Company @relation(fields: [companyId], references: [id])
+  module    Module  @relation(fields: [moduleId], references: [id])
+
+  active    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+
+  @@unique([companyId, moduleId])
+  @@index([companyId])
+}
+
+//////////////////////////////////////////////////////
+// DATASET (NÍVEL MLOps)
+//////////////////////////////////////////////////////
+
+model DatasetVersion {
+  id          Int      @id @default(autoincrement())
+  name        String
+  version     String
+  description String?
+
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  models      AIModel[]
+
+  createdAt   DateTime @default(now())
+
+  @@index([companyId])
+}
+
+//////////////////////////////////////////////////////
+// AI CORE
+//////////////////////////////////////////////////////
+
+model AIModel {
+  id          Int      @id @default(autoincrement())
+  name        String
+  version     String
+  provider    String   // roboflow, yolo, aws, etc
+  endpoint    String?
+  apiKey      String?
+
+  moduleId    Int
+  module      Module   @relation(fields: [moduleId], references: [id])
+
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  datasetId   Int?
+  dataset     DatasetVersion? @relation(fields: [datasetId], references: [id])
+
+  inspections Inspection[]
+
+  createdAt   DateTime @default(now())
+
+  @@index([companyId])
+  @@index([moduleId])
+  @@index([datasetId])
+}
+
+//////////////////////////////////////////////////////
+// UPLOAD (ENTRADA BRUTA)
+//////////////////////////////////////////////////////
+
+model Upload {
+  id          Int      @id @default(autoincrement())
+
+  url         String
+  filename    String
+  size        Int?
+  mimeType    String?
+
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
+
+  inspections Inspection[]
+
+  createdAt   DateTime @default(now())
+
+  @@index([companyId])
+}
+
+//////////////////////////////////////////////////////
+// INSPECTION (INFERÊNCIA)
+//////////////////////////////////////////////////////
+
+model Inspection {
+  id          Int      @id @default(autoincrement())
+
+  companyId   Int
+  company     Company  @relation(fields: [companyId], references: [id])
+
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id])
+
+  uploadId    Int
+  upload      Upload   @relation(fields: [uploadId], references: [id])
+
+  modelId     Int
+  model       AIModel  @relation(fields: [modelId], references: [id])
+
+  status      InspectionStatus
+  resultJson  Json
+  confidence  Float?
+  inferenceMs Int?     // tempo de resposta do modelo
+
+  predictions Prediction[]
+  feedbacks   Feedback[]
+
+  createdAt   DateTime @default(now())
+
+  @@index([companyId])
+  @@index([modelId])
+  @@index([uploadId])
+}
+
+//////////////////////////////////////////////////////
+// DETECÇÕES (OURO PURO PARA ANALYTICS)
+//////////////////////////////////////////////////////
+
+model Prediction {
+  id            Int      @id @default(autoincrement())
+
+  inspectionId  Int
+  inspection    Inspection @relation(fields: [inspectionId], references: [id])
+
+  label         String
+  confidence    Float
+
+  // bounding box (object detection)
+  x             Float?
+  y             Float?
+  width         Float?
+  height        Float?
+
+  createdAt     DateTime @default(now())
+
+  @@index([inspectionId])
+}
+
+//////////////////////////////////////////////////////
+// HUMAN IN THE LOOP (STARTUP LEVEL)
+//////////////////////////////////////////////////////
+
+model Feedback {
+  id            Int      @id @default(autoincrement())
+
+  inspectionId  Int
+  inspection    Inspection @relation(fields: [inspectionId], references: [id])
+
+  type          FeedbackType
+  comment       String?
+
+  createdAt     DateTime @default(now())
+}

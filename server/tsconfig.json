@@ -14,7 +14,7 @@
   },
   "include": [
     "src/**/*",
-    "prisma/**/*",
+    "src/database/prisma/**/*",
     "generated/**/*"
   ],
   "exclude": [

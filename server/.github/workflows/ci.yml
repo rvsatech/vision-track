@@ -1,0 +1,49 @@
+name: Node.js CI  # Nome do workflow, aparece no GitHub Actions
+
+# Quando o workflow será executado
+on:
+  push:
+    branches: [ main ]           # Executa ao fazer push no branch 'main'
+  pull_request:
+    branches: [ main ]           # Executa quando abrir PR contra 'main'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest        # Usa a última versão do Ubuntu como runner
+
+    steps:
+      # 1️⃣ Pegar o código do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v3  # Necessário para qualquer workflow
+
+      # 2️⃣ Instalar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'      # Versão do Node.js usada no projeto
+          cache: 'pnpm'           # Cache de dependências para acelerar builds
+
+      # 3️⃣ Instalar dependências
+      - name: Install dependencies
+        run: pnpm install           # Instala todas as dependências do projeto
+
+      # 4️⃣ Lint (opcional, mas recomendado)
+      - name: Run lint
+        run: pnpm lint              # Caso tenha script de lint no package.json
+
+      # 5️⃣ Rodar build do TypeScript
+      - name: Build project
+        run: pnpm build             # Compila TS para JS (opcional, mas útil para detectar erros TS)
+
+      # 6️⃣ Rodar testes unitários
+      - name: Run unit tests
+        run: pnpm test              # Roda todos os testes do Jest
+        # Se algum teste falhar, o workflow falha automaticamente
+
+      # 7️⃣ Rodar cobertura (opcional)
+      - name: Run coverage
+        run: pnpm test:cov          # Gera relatório de cobertura dos testes
+
+      # 8️⃣ Rodar testes E2E (opcional)
+      - name: Run E2E tests
+        run: pnpm test:e2e          # Se você tiver testes end-to-end configurados
