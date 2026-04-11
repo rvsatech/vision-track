@@ -55,8 +55,6 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3003);
   console.log(`SERVER: http://localhost:${process.env.PORT ?? 3003}`);
-  console.log(
-    `API DOCS: http://localhost:${process.env.PORT ?? 3003}/docs`,
-  );
+  console.log(`API DOCS: http://localhost:${process.env.PORT ?? 3003}/docs`);
 }
 bootstrap();
