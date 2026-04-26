@@ -1,0 +1,1 @@
+export const TEST_JWT_SECRET = 'RANDOM_DEV_SECRET_123_ABC';

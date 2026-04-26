@@ -1,42 +1,42 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { CurrentUser } from './decorators/user.decorator';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('login')
+  @ApiOperation({ summary: 'Autenticar usuário e retornar o JWT' })
+  @ApiBody({ type: LoginDto })
+  @ApiResponse({ status: 200, description: 'Login bem-sucedido e token retornado' })
+  @ApiResponse({ status: 401, description: 'Credenciais inválidas' })
+  login(@Body() loginDto: LoginDto) {
+    return this.authService.login(loginDto);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
+  @Post('register')
+  @ApiOperation({ summary: 'Registrar um novo usuário na plataforma' })
+  @ApiBody({ type: RegisterDto })
+  @ApiResponse({ status: 201, description: 'Usuário registrado com sucesso' })
+  @ApiResponse({ status: 400, description: 'Empresa não encontrada' })
+  @ApiResponse({ status: 409, description: 'E-mail já cadastrado' })
+  register(@Body() registerDto: RegisterDto) {
+    return this.authService.register(registerDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Retornar os dados do usuário logado' })
+  @ApiResponse({ status: 200, description: 'Dados do usuário autenticado' })
+  @ApiResponse({ status: 401, description: 'Token inválido ou não fornecido' })
+  getMe(@CurrentUser() user: any) {
+    return user;
   }
 }

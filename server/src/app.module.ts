@@ -16,7 +16,7 @@ import { UploadsModule } from './modules/platform/uploads/uploads.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     UsersModule,
     AuthModule,
