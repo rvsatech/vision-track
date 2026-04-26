@@ -88,6 +88,17 @@ Isso evita 90% dos erros.
 
 # 🐳 DOCKER
 
+## Pré-requisitos do Docker
+
+1. **Abra o Docker Desktop** no seu computador antes de rodar os comandos.
+2. **Crie o arquivo `.env`** na raiz do projeto copiando o `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+---
+
 ## Subir containers
 
 ```bash
@@ -172,10 +183,12 @@ docker system prune -a
 
 # 🧠 PRISMA (rodar dentro de `/server`)
 
+> **Nota para usuários de Windows:** Recomendamos usar `npx prisma` em vez de `pnpm prisma` para evitar erros de permissão de execução de scripts do PowerShell.
+
 ## Gerar client
 
 ```bash
-pnpm prisma generate
+npx prisma generate
 ```
 
 ---
@@ -183,7 +196,7 @@ pnpm prisma generate
 ## Criar migration
 
 ```bash
-pnpm prisma migrate dev
+npx prisma migrate dev
 ```
 
 ---
@@ -193,7 +206,7 @@ pnpm prisma migrate dev
 ⚠️ apaga tudo
 
 ```bash
-pnpm prisma migrate reset
+npx prisma migrate reset
 ```
 
 ---
@@ -201,7 +214,7 @@ pnpm prisma migrate reset
 ## Abrir GUI do banco
 
 ```bash
-pnpm prisma studio
+npx prisma studio
 ```
 
 ---
