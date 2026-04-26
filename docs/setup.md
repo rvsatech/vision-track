@@ -1,518 +1,71 @@
-# Vision Track — Dev Commands & Setup
+# Vision Track — Guia de Setup & Comandos
 
-Este arquivo centraliza **TODOS os comandos importantes do projeto** para evitar perda de tempo e reduzir fricção no onboarding.
-
-Use este documento como referência rápida.
+Bem-vindo ao Vision Track! Reduzimos a complexidade do onboarding com um CLI interativo nativo para Windows.
 
 ---
 
-# ✅ PRÉ-REQUISITOS
+## ⚡ Inicialização Rápida (Recomendado)
 
-Instale tudo antes de rodar o projeto.
+Na raiz do projeto, disponibilizamos o script **`dev.bat`**.
+Basta dar um duplo clique nele pelo seu Explorador de Arquivos, ou rodar no terminal `.\dev.bat` e um menu interativo aparecerá.
 
-## Node + PNPM
+Use o menu para, na ordem correta:
+1. Subir o banco de dados via Docker.
+2. Aplicar as Migrations do Prisma.
+3. Gerar o Client do Prisma.
+4. Iniciar o backend NestJS localmente.
 
-```bash
-npm install -g pnpm
-```
-
-Verificar:
-
-```bash
-node -v
-pnpm -v
-```
+Isso previne a maioria dos erros de configuração de portas e restrições de shell no Windows.
 
 ---
 
-## Docker + Compose
+## 📦 Pré-requisitos Manuais
 
-Verificar instalação:
+Certifique-se de que sua máquina possui:
+- **Node.js** (v18+) e **pnpm** (`npm install -g pnpm`)
+- **Docker Desktop** rodando em background.
+- **Python 3.10+** (Para o ambiente de ML local).
 
-```bash
-docker --version
-docker compose version
-```
-
----
-
-## Python (ML)
-
-Recomendado: **Miniconda**
-
-Criar ambiente:
-
-```bash
-conda create -n visiontrack-ml python=3.10
-conda activate visiontrack-ml
-```
-
----
-
-## Instalar dependências do ML
-
-Dentro da pasta `ml`:
-
-```bash
-pip install -r requirements.txt
-```
-
-Se YOLO não estiver:
-
-```bash
-pip install ultralytics
-```
-
-Se Label Studio não estiver:
-
-```bash
-pip install label-studio
-```
-
----
-
-# 🚀 ORDEM CORRETA PARA SUBIR O PROJETO
-
-Sempre siga:
-
-```
-1️⃣ Docker (banco)
-2️⃣ Prisma migrate
-3️⃣ Server
-4️⃣ ML service
-```
-
-Isso evita 90% dos erros.
-
----
-
-# 🐳 DOCKER
-
-## Pré-requisitos do Docker
-
-1. **Abra o Docker Desktop** no seu computador antes de rodar os comandos.
-2. **Crie o arquivo `.env`** na raiz do projeto copiando o `.env.example`:
-
+### Arquivo `.env`
+Antes de rodar a automação ou o docker, crie o seu arquivo de ambiente na raiz do projeto (basta clonar o exemplo existente):
 ```bash
 cp .env.example .env
 ```
 
 ---
 
-## Subir containers
+## 🧠 Comandos Avançados (Manuais)
 
-```bash
-docker compose up -d
-```
+Caso precise rodar comandos isolados sem a interface do `.bat`:
 
----
+### Prisma (Executar dentro da pasta `/server`)
+> 💡 *Sempre use `npx prisma` para evitar problemas de restrição de scripts no Powershell do Windows.*
+- Resetar banco inteiro: `npx prisma migrate reset`
+- Abrir GUI do Banco de Dados: `npx prisma studio`
 
-## Buildar containers
-
-```bash
-docker compose up -d --build
-```
-
----
-
-## Parar containers
-
-```bash
-docker compose down
-```
+### NestJS (Executar dentro da pasta `/server`)
+- Fazer build para Produção: `pnpm build`
+- Instalar bibliotecas ou reinstalá-las: `pnpm install`
 
 ---
 
-## RESET TOTAL (apaga banco)
-
-```bash
-docker compose down -v
-```
-
----
-
-## Ver containers rodando
-
-```bash
-docker ps
-```
-
-Todos:
-
-```bash
-docker ps -a
-```
-
----
-
-## Ver imagens
-
-```bash
-docker images
-```
-
----
-
-## Entrar no container
-
-```bash
-docker exec -it NOME_DO_CONTAINER bash
-```
-
-ou
-
-```bash
-docker exec -it NOME_DO_CONTAINER sh
-```
-
----
-
-## Limpar cache pesado
-
-```bash
-docker system prune
-```
-
-Modo agressivo:
-
-```bash
-docker system prune -a
-```
-
----
-
-# 🧠 PRISMA (rodar dentro de `/server`)
-
-> **Nota para usuários de Windows:** Recomendamos usar `npx prisma` em vez de `pnpm prisma` para evitar erros de permissão de execução de scripts do PowerShell.
-
-## Gerar client
-
-```bash
-npx prisma generate
-```
-
----
-
-## Criar migration
-
-```bash
-npx prisma migrate dev
-```
-
----
-
-## Resetar banco
-
-⚠️ apaga tudo
-
-```bash
-npx prisma migrate reset
-```
-
----
-
-## Abrir GUI do banco
-
-```bash
-npx prisma studio
-```
-
----
-
-# 🖥️ SERVER (NestJS)
-
-Ir para pasta:
-
-```bash
-cd server
-```
-
----
-
-## Instalar deps
-
-```bash
-pnpm install
-```
-
----
-
-## Rodar em dev
-
-```bash
-pnpm start:dev
-```
-
----
-
-## Build
-
-```bash
-pnpm build
-```
-
----
-
-## Rodar produção local
-
-```bash
-pnpm start:prod
-```
-
----
-
-## Lint
-
-```bash
-pnpm lint
-```
-
----
-
-## Testes
-
-```bash
-pnpm test
-pnpm test:e2e
-pnpm test:cov
-```
-
----
-
-## Criar módulo/resource automaticamente
-
-Exemplo:
-
-```bash
-nest g resource modules/users
-```
-
-Sem arquivos de teste:
-
-```bash
-nest g resource modules/users --no-spec
-```
-
----
-
-## Criar vários módulos de uma vez (Git Bash / Linux / Mac)
-
-```bash
-for module in users auth companies plans modules inspections ai-models images uploads billing subscriptions
-do
-  nest g resource modules/$module --no-spec
-done
-```
-
----
-
-# 🤖 ML SERVICE (FastAPI)
-
-Ativar ambiente:
-
-```bash
-conda activate visiontrack-ml
-```
-
-Ir para pasta:
-
-```bash
-cd ml
-```
-
----
-
-## Subir FastAPI
-
-```bash
-uvicorn src.api.main:app --reload
-```
-
-Swagger:
-
-```
-http://localhost:8000/docs
-```
-
----
-
-# 🔥 YOLO (Ultralytics)
-
-## Treinar Object Detection
-
-```bash
-yolo detect train model=yolov8n.pt data=data.yaml epochs=50
-```
-
----
-
-## Treinar Classificação
-
-```bash
-yolo classify train model=yolov8n-cls.pt data=. epochs=30
-```
-
----
-
-## Rodar previsão (inference)
-
-```bash
-yolo detect predict model=best.pt source=imagem.jpg
-```
-
-Resultados:
-
-```
-runs/detect/predict
-```
-
----
-
-## Validar modelo
-
-```bash
-yolo detect val model=best.pt data=data.yaml
-```
-
----
-
-# 🏷️ LABEL STUDIO
-
-## Rodar
-
-```bash
-label-studio
-```
-
-Abrir:
-
-```
-http://localhost:8080
-```
-
----
-
-# 🐍 Comandos úteis Python
-
-Ver versão:
-
-```bash
-python --version
-```
-
-Listar libs:
-
-```bash
-pip list
-```
-
-Instalar lib:
-
-```bash
-pip install nome_da_lib
-```
-
-Exportar requirements:
-
-```bash
-pip freeze > requirements.txt
-```
-
----
-
-# 📦 GIT (bônus — essenciais)
-
-## Novo branch
-
-```bash
-git checkout -b feature/nome-da-feature
-```
-
----
-
-## Status
-
-```bash
-git status
-```
-
----
-
-## Commit
-
-```bash
-git add .
-git commit -m "feat: descrição"
-```
-
----
-
-## Push
-
-```bash
-git push origin nome-da-branch
-```
-
----
-
-# ⚠️ NUNCA COMMITAR
-
-Adicione ao `.gitignore`:
-
-```
-node_modules
-dist
-.env
-coverage
-runs/
-__pycache__
-generated/
-*.log
-```
-
----
-
-# 💡 DICAS DE ENGENHEIRO SENIOR
-
-## Quando algo quebrar misteriosamente:
-
-O ritual universal:
-
-```bash
-docker compose down -v
-docker compose up -d --build
-pnpm prisma migrate dev
-```
-
-Funciona mais do que deveria 🙂
-
----
-
-## Mantenha sempre essa ordem mental:
-
-👉 Infra (Docker)
-👉 Banco (Prisma)
-👉 Backend
-👉 ML
-
-Nunca o contrário.
-
----
-
-## Extra (ALTAMENTE recomendado futuramente)
-
-Crie automações com:
-
-* **Makefile**
-  ou
-* **Taskfile**
-
-Exemplo:
-
-```
-make dev
-make reset
-make ml
-```
-
-Você nunca mais vai decorar comandos.
+## 🤖 Ambiente de Machine Learning (Python)
+
+O ML roda em um ecossistema separado e não é automatizado pelo `.bat` devido ao peso e características das dependências do Python.
+
+1. **Ativar Ambiente Virtual (Ex: Miniconda)**
+   ```bash
+   conda create -n visiontrack-ml python=3.10
+   conda activate visiontrack-ml
+   ```
+2. **Instalar Dependências**
+   ```bash
+   cd ml
+   pip install -r requirements.txt
+   ```
+3. **Subir a API FastAPI do Modelo**
+   ```bash
+   uvicorn src.api.main:app --reload
+   ```
+
+*(Para treinar YOLOv8 ou rodar inferências cruas pelo terminal, consulte a documentação detalhada dentro da pasta `/ml`).*
