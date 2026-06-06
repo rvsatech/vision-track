@@ -22,7 +22,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
 
     if (!secret) {
-      this.logger.warn('JWT_SECRET não encontrado no .env. Utilizando chave de teste (INSEGURO PARA PROD).');
+      this.logger.warn(
+        'JWT_SECRET não encontrado no .env. Utilizando chave de teste (INSEGURO PARA PROD).',
+      );
     }
   }
 

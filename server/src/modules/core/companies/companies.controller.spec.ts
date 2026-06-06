@@ -26,7 +26,7 @@ describe('CompaniesController', () => {
     }).compile();
 
     controller = module.get<CompaniesController>(CompaniesController);
-    service = module.get(CompaniesService) as any;
+    service = module.get(CompaniesService);
   });
 
   afterEach(() => {

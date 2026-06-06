@@ -451,9 +451,9 @@ export type UploadSumOrderByAggregateInput = {
   userId?: Prisma.SortOrder
 }
 
-export type UploadScalarRelationFilter = {
-  is?: Prisma.UploadWhereInput
-  isNot?: Prisma.UploadWhereInput
+export type UploadNullableScalarRelationFilter = {
+  is?: Prisma.UploadWhereInput | null
+  isNot?: Prisma.UploadWhereInput | null
 }
 
 export type UploadCreateNestedManyWithoutCompanyInput = {
@@ -546,10 +546,12 @@ export type UploadCreateNestedOneWithoutInspectionsInput = {
   connect?: Prisma.UploadWhereUniqueInput
 }
 
-export type UploadUpdateOneRequiredWithoutInspectionsNestedInput = {
+export type UploadUpdateOneWithoutInspectionsNestedInput = {
   create?: Prisma.XOR<Prisma.UploadCreateWithoutInspectionsInput, Prisma.UploadUncheckedCreateWithoutInspectionsInput>
   connectOrCreate?: Prisma.UploadCreateOrConnectWithoutInspectionsInput
   upsert?: Prisma.UploadUpsertWithoutInspectionsInput
+  disconnect?: Prisma.UploadWhereInput | boolean
+  delete?: Prisma.UploadWhereInput | boolean
   connect?: Prisma.UploadWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UploadUpdateToOneWithWhereWithoutInspectionsInput, Prisma.UploadUpdateWithoutInspectionsInput>, Prisma.UploadUncheckedUpdateWithoutInspectionsInput>
 }

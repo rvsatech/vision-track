@@ -31,7 +31,6 @@ export type InspectionAvgAggregateOutputType = {
   companyId: number | null
   userId: number | null
   uploadId: number | null
-  modelId: number | null
   confidence: number | null
   inferenceMs: number | null
 }
@@ -41,7 +40,6 @@ export type InspectionSumAggregateOutputType = {
   companyId: number | null
   userId: number | null
   uploadId: number | null
-  modelId: number | null
   confidence: number | null
   inferenceMs: number | null
 }
@@ -51,7 +49,6 @@ export type InspectionMinAggregateOutputType = {
   companyId: number | null
   userId: number | null
   uploadId: number | null
-  modelId: number | null
   status: $Enums.InspectionStatus | null
   confidence: number | null
   inferenceMs: number | null
@@ -63,7 +60,6 @@ export type InspectionMaxAggregateOutputType = {
   companyId: number | null
   userId: number | null
   uploadId: number | null
-  modelId: number | null
   status: $Enums.InspectionStatus | null
   confidence: number | null
   inferenceMs: number | null
@@ -75,7 +71,6 @@ export type InspectionCountAggregateOutputType = {
   companyId: number
   userId: number
   uploadId: number
-  modelId: number
   status: number
   resultJson: number
   confidence: number
@@ -90,7 +85,6 @@ export type InspectionAvgAggregateInputType = {
   companyId?: true
   userId?: true
   uploadId?: true
-  modelId?: true
   confidence?: true
   inferenceMs?: true
 }
@@ -100,7 +94,6 @@ export type InspectionSumAggregateInputType = {
   companyId?: true
   userId?: true
   uploadId?: true
-  modelId?: true
   confidence?: true
   inferenceMs?: true
 }
@@ -110,7 +103,6 @@ export type InspectionMinAggregateInputType = {
   companyId?: true
   userId?: true
   uploadId?: true
-  modelId?: true
   status?: true
   confidence?: true
   inferenceMs?: true
@@ -122,7 +114,6 @@ export type InspectionMaxAggregateInputType = {
   companyId?: true
   userId?: true
   uploadId?: true
-  modelId?: true
   status?: true
   confidence?: true
   inferenceMs?: true
@@ -134,7 +125,6 @@ export type InspectionCountAggregateInputType = {
   companyId?: true
   userId?: true
   uploadId?: true
-  modelId?: true
   status?: true
   resultJson?: true
   confidence?: true
@@ -233,8 +223,7 @@ export type InspectionGroupByOutputType = {
   id: number
   companyId: number
   userId: number | null
-  uploadId: number
-  modelId: number
+  uploadId: number | null
   status: $Enums.InspectionStatus
   resultJson: runtime.JsonValue
   confidence: number | null
@@ -269,8 +258,7 @@ export type InspectionWhereInput = {
   id?: Prisma.IntFilter<"Inspection"> | number
   companyId?: Prisma.IntFilter<"Inspection"> | number
   userId?: Prisma.IntNullableFilter<"Inspection"> | number | null
-  uploadId?: Prisma.IntFilter<"Inspection"> | number
-  modelId?: Prisma.IntFilter<"Inspection"> | number
+  uploadId?: Prisma.IntNullableFilter<"Inspection"> | number | null
   status?: Prisma.EnumInspectionStatusFilter<"Inspection"> | $Enums.InspectionStatus
   resultJson?: Prisma.JsonFilter<"Inspection">
   confidence?: Prisma.FloatNullableFilter<"Inspection"> | number | null
@@ -278,18 +266,14 @@ export type InspectionWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Inspection"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  upload?: Prisma.XOR<Prisma.UploadScalarRelationFilter, Prisma.UploadWhereInput>
-  model?: Prisma.XOR<Prisma.AIModelScalarRelationFilter, Prisma.AIModelWhereInput>
-  predictions?: Prisma.PredictionListRelationFilter
-  feedbacks?: Prisma.FeedbackListRelationFilter
+  upload?: Prisma.XOR<Prisma.UploadNullableScalarRelationFilter, Prisma.UploadWhereInput> | null
 }
 
 export type InspectionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
+  uploadId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   resultJson?: Prisma.SortOrder
   confidence?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -298,9 +282,6 @@ export type InspectionOrderByWithRelationInput = {
   company?: Prisma.CompanyOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   upload?: Prisma.UploadOrderByWithRelationInput
-  model?: Prisma.AIModelOrderByWithRelationInput
-  predictions?: Prisma.PredictionOrderByRelationAggregateInput
-  feedbacks?: Prisma.FeedbackOrderByRelationAggregateInput
 }
 
 export type InspectionWhereUniqueInput = Prisma.AtLeast<{
@@ -310,8 +291,7 @@ export type InspectionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.InspectionWhereInput | Prisma.InspectionWhereInput[]
   companyId?: Prisma.IntFilter<"Inspection"> | number
   userId?: Prisma.IntNullableFilter<"Inspection"> | number | null
-  uploadId?: Prisma.IntFilter<"Inspection"> | number
-  modelId?: Prisma.IntFilter<"Inspection"> | number
+  uploadId?: Prisma.IntNullableFilter<"Inspection"> | number | null
   status?: Prisma.EnumInspectionStatusFilter<"Inspection"> | $Enums.InspectionStatus
   resultJson?: Prisma.JsonFilter<"Inspection">
   confidence?: Prisma.FloatNullableFilter<"Inspection"> | number | null
@@ -319,18 +299,14 @@ export type InspectionWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Inspection"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  upload?: Prisma.XOR<Prisma.UploadScalarRelationFilter, Prisma.UploadWhereInput>
-  model?: Prisma.XOR<Prisma.AIModelScalarRelationFilter, Prisma.AIModelWhereInput>
-  predictions?: Prisma.PredictionListRelationFilter
-  feedbacks?: Prisma.FeedbackListRelationFilter
+  upload?: Prisma.XOR<Prisma.UploadNullableScalarRelationFilter, Prisma.UploadWhereInput> | null
 }, "id">
 
 export type InspectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
+  uploadId?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   resultJson?: Prisma.SortOrder
   confidence?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -350,8 +326,7 @@ export type InspectionScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Inspection"> | number
   companyId?: Prisma.IntWithAggregatesFilter<"Inspection"> | number
   userId?: Prisma.IntNullableWithAggregatesFilter<"Inspection"> | number | null
-  uploadId?: Prisma.IntWithAggregatesFilter<"Inspection"> | number
-  modelId?: Prisma.IntWithAggregatesFilter<"Inspection"> | number
+  uploadId?: Prisma.IntNullableWithAggregatesFilter<"Inspection"> | number | null
   status?: Prisma.EnumInspectionStatusWithAggregatesFilter<"Inspection"> | $Enums.InspectionStatus
   resultJson?: Prisma.JsonWithAggregatesFilter<"Inspection">
   confidence?: Prisma.FloatNullableWithAggregatesFilter<"Inspection"> | number | null
@@ -367,25 +342,19 @@ export type InspectionCreateInput = {
   createdAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
   user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
+  upload?: Prisma.UploadCreateNestedOneWithoutInspectionsInput
 }
 
 export type InspectionUncheckedCreateInput = {
   id?: number
   companyId: number
   userId?: number | null
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
   inferenceMs?: number | null
   createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
 }
 
 export type InspectionUpdateInput = {
@@ -396,33 +365,26 @@ export type InspectionUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
   user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
+  upload?: Prisma.UploadUpdateOneWithoutInspectionsNestedInput
 }
 
 export type InspectionUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
 }
 
 export type InspectionCreateManyInput = {
   id?: number
   companyId: number
   userId?: number | null
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
@@ -442,8 +404,7 @@ export type InspectionUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -466,7 +427,6 @@ export type InspectionCountOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   resultJson?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
@@ -479,7 +439,6 @@ export type InspectionAvgOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   inferenceMs?: Prisma.SortOrder
 }
@@ -489,7 +448,6 @@ export type InspectionMaxOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   inferenceMs?: Prisma.SortOrder
@@ -501,7 +459,6 @@ export type InspectionMinOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   inferenceMs?: Prisma.SortOrder
@@ -513,14 +470,8 @@ export type InspectionSumOrderByAggregateInput = {
   companyId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   uploadId?: Prisma.SortOrder
-  modelId?: Prisma.SortOrder
   confidence?: Prisma.SortOrder
   inferenceMs?: Prisma.SortOrder
-}
-
-export type InspectionScalarRelationFilter = {
-  is?: Prisma.InspectionWhereInput
-  isNot?: Prisma.InspectionWhereInput
 }
 
 export type InspectionCreateNestedManyWithoutCompanyInput = {
@@ -607,48 +558,6 @@ export type InspectionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.InspectionScalarWhereInput | Prisma.InspectionScalarWhereInput[]
 }
 
-export type InspectionCreateNestedManyWithoutModelInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput> | Prisma.InspectionCreateWithoutModelInput[] | Prisma.InspectionUncheckedCreateWithoutModelInput[]
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutModelInput | Prisma.InspectionCreateOrConnectWithoutModelInput[]
-  createMany?: Prisma.InspectionCreateManyModelInputEnvelope
-  connect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-}
-
-export type InspectionUncheckedCreateNestedManyWithoutModelInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput> | Prisma.InspectionCreateWithoutModelInput[] | Prisma.InspectionUncheckedCreateWithoutModelInput[]
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutModelInput | Prisma.InspectionCreateOrConnectWithoutModelInput[]
-  createMany?: Prisma.InspectionCreateManyModelInputEnvelope
-  connect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-}
-
-export type InspectionUpdateManyWithoutModelNestedInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput> | Prisma.InspectionCreateWithoutModelInput[] | Prisma.InspectionUncheckedCreateWithoutModelInput[]
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutModelInput | Prisma.InspectionCreateOrConnectWithoutModelInput[]
-  upsert?: Prisma.InspectionUpsertWithWhereUniqueWithoutModelInput | Prisma.InspectionUpsertWithWhereUniqueWithoutModelInput[]
-  createMany?: Prisma.InspectionCreateManyModelInputEnvelope
-  set?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  disconnect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  delete?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  connect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  update?: Prisma.InspectionUpdateWithWhereUniqueWithoutModelInput | Prisma.InspectionUpdateWithWhereUniqueWithoutModelInput[]
-  updateMany?: Prisma.InspectionUpdateManyWithWhereWithoutModelInput | Prisma.InspectionUpdateManyWithWhereWithoutModelInput[]
-  deleteMany?: Prisma.InspectionScalarWhereInput | Prisma.InspectionScalarWhereInput[]
-}
-
-export type InspectionUncheckedUpdateManyWithoutModelNestedInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput> | Prisma.InspectionCreateWithoutModelInput[] | Prisma.InspectionUncheckedCreateWithoutModelInput[]
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutModelInput | Prisma.InspectionCreateOrConnectWithoutModelInput[]
-  upsert?: Prisma.InspectionUpsertWithWhereUniqueWithoutModelInput | Prisma.InspectionUpsertWithWhereUniqueWithoutModelInput[]
-  createMany?: Prisma.InspectionCreateManyModelInputEnvelope
-  set?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  disconnect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  delete?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  connect?: Prisma.InspectionWhereUniqueInput | Prisma.InspectionWhereUniqueInput[]
-  update?: Prisma.InspectionUpdateWithWhereUniqueWithoutModelInput | Prisma.InspectionUpdateWithWhereUniqueWithoutModelInput[]
-  updateMany?: Prisma.InspectionUpdateManyWithWhereWithoutModelInput | Prisma.InspectionUpdateManyWithWhereWithoutModelInput[]
-  deleteMany?: Prisma.InspectionScalarWhereInput | Prisma.InspectionScalarWhereInput[]
-}
-
 export type InspectionCreateNestedManyWithoutUploadInput = {
   create?: Prisma.XOR<Prisma.InspectionCreateWithoutUploadInput, Prisma.InspectionUncheckedCreateWithoutUploadInput> | Prisma.InspectionCreateWithoutUploadInput[] | Prisma.InspectionUncheckedCreateWithoutUploadInput[]
   connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutUploadInput | Prisma.InspectionCreateOrConnectWithoutUploadInput[]
@@ -703,34 +612,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type InspectionCreateNestedOneWithoutPredictionsInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutPredictionsInput, Prisma.InspectionUncheckedCreateWithoutPredictionsInput>
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutPredictionsInput
-  connect?: Prisma.InspectionWhereUniqueInput
-}
-
-export type InspectionUpdateOneRequiredWithoutPredictionsNestedInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutPredictionsInput, Prisma.InspectionUncheckedCreateWithoutPredictionsInput>
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutPredictionsInput
-  upsert?: Prisma.InspectionUpsertWithoutPredictionsInput
-  connect?: Prisma.InspectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.InspectionUpdateToOneWithWhereWithoutPredictionsInput, Prisma.InspectionUpdateWithoutPredictionsInput>, Prisma.InspectionUncheckedUpdateWithoutPredictionsInput>
-}
-
-export type InspectionCreateNestedOneWithoutFeedbacksInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutFeedbacksInput, Prisma.InspectionUncheckedCreateWithoutFeedbacksInput>
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutFeedbacksInput
-  connect?: Prisma.InspectionWhereUniqueInput
-}
-
-export type InspectionUpdateOneRequiredWithoutFeedbacksNestedInput = {
-  create?: Prisma.XOR<Prisma.InspectionCreateWithoutFeedbacksInput, Prisma.InspectionUncheckedCreateWithoutFeedbacksInput>
-  connectOrCreate?: Prisma.InspectionCreateOrConnectWithoutFeedbacksInput
-  upsert?: Prisma.InspectionUpsertWithoutFeedbacksInput
-  connect?: Prisma.InspectionWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.InspectionUpdateToOneWithWhereWithoutFeedbacksInput, Prisma.InspectionUpdateWithoutFeedbacksInput>, Prisma.InspectionUncheckedUpdateWithoutFeedbacksInput>
-}
-
 export type InspectionCreateWithoutCompanyInput = {
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -738,24 +619,18 @@ export type InspectionCreateWithoutCompanyInput = {
   inferenceMs?: number | null
   createdAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
+  upload?: Prisma.UploadCreateNestedOneWithoutInspectionsInput
 }
 
 export type InspectionUncheckedCreateWithoutCompanyInput = {
   id?: number
   userId?: number | null
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
   inferenceMs?: number | null
   createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
 }
 
 export type InspectionCreateOrConnectWithoutCompanyInput = {
@@ -791,8 +666,7 @@ export type InspectionScalarWhereInput = {
   id?: Prisma.IntFilter<"Inspection"> | number
   companyId?: Prisma.IntFilter<"Inspection"> | number
   userId?: Prisma.IntNullableFilter<"Inspection"> | number | null
-  uploadId?: Prisma.IntFilter<"Inspection"> | number
-  modelId?: Prisma.IntFilter<"Inspection"> | number
+  uploadId?: Prisma.IntNullableFilter<"Inspection"> | number | null
   status?: Prisma.EnumInspectionStatusFilter<"Inspection"> | $Enums.InspectionStatus
   resultJson?: Prisma.JsonFilter<"Inspection">
   confidence?: Prisma.FloatNullableFilter<"Inspection"> | number | null
@@ -807,24 +681,18 @@ export type InspectionCreateWithoutUserInput = {
   inferenceMs?: number | null
   createdAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
+  upload?: Prisma.UploadCreateNestedOneWithoutInspectionsInput
 }
 
 export type InspectionUncheckedCreateWithoutUserInput = {
   id?: number
   companyId: number
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
   inferenceMs?: number | null
   createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
 }
 
 export type InspectionCreateOrConnectWithoutUserInput = {
@@ -853,59 +721,6 @@ export type InspectionUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.InspectionUpdateManyMutationInput, Prisma.InspectionUncheckedUpdateManyWithoutUserInput>
 }
 
-export type InspectionCreateWithoutModelInput = {
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
-  user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionUncheckedCreateWithoutModelInput = {
-  id?: number
-  companyId: number
-  userId?: number | null
-  uploadId: number
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionCreateOrConnectWithoutModelInput = {
-  where: Prisma.InspectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput>
-}
-
-export type InspectionCreateManyModelInputEnvelope = {
-  data: Prisma.InspectionCreateManyModelInput | Prisma.InspectionCreateManyModelInput[]
-  skipDuplicates?: boolean
-}
-
-export type InspectionUpsertWithWhereUniqueWithoutModelInput = {
-  where: Prisma.InspectionWhereUniqueInput
-  update: Prisma.XOR<Prisma.InspectionUpdateWithoutModelInput, Prisma.InspectionUncheckedUpdateWithoutModelInput>
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutModelInput, Prisma.InspectionUncheckedCreateWithoutModelInput>
-}
-
-export type InspectionUpdateWithWhereUniqueWithoutModelInput = {
-  where: Prisma.InspectionWhereUniqueInput
-  data: Prisma.XOR<Prisma.InspectionUpdateWithoutModelInput, Prisma.InspectionUncheckedUpdateWithoutModelInput>
-}
-
-export type InspectionUpdateManyWithWhereWithoutModelInput = {
-  where: Prisma.InspectionScalarWhereInput
-  data: Prisma.XOR<Prisma.InspectionUpdateManyMutationInput, Prisma.InspectionUncheckedUpdateManyWithoutModelInput>
-}
-
 export type InspectionCreateWithoutUploadInput = {
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -914,23 +729,17 @@ export type InspectionCreateWithoutUploadInput = {
   createdAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
   user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
 }
 
 export type InspectionUncheckedCreateWithoutUploadInput = {
   id?: number
   companyId: number
   userId?: number | null
-  modelId: number
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
   inferenceMs?: number | null
   createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
 }
 
 export type InspectionCreateOrConnectWithoutUploadInput = {
@@ -959,151 +768,10 @@ export type InspectionUpdateManyWithWhereWithoutUploadInput = {
   data: Prisma.XOR<Prisma.InspectionUpdateManyMutationInput, Prisma.InspectionUncheckedUpdateManyWithoutUploadInput>
 }
 
-export type InspectionCreateWithoutPredictionsInput = {
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
-  user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  feedbacks?: Prisma.FeedbackCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionUncheckedCreateWithoutPredictionsInput = {
-  id?: number
-  companyId: number
-  userId?: number | null
-  uploadId: number
-  modelId: number
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  feedbacks?: Prisma.FeedbackUncheckedCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionCreateOrConnectWithoutPredictionsInput = {
-  where: Prisma.InspectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutPredictionsInput, Prisma.InspectionUncheckedCreateWithoutPredictionsInput>
-}
-
-export type InspectionUpsertWithoutPredictionsInput = {
-  update: Prisma.XOR<Prisma.InspectionUpdateWithoutPredictionsInput, Prisma.InspectionUncheckedUpdateWithoutPredictionsInput>
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutPredictionsInput, Prisma.InspectionUncheckedCreateWithoutPredictionsInput>
-  where?: Prisma.InspectionWhereInput
-}
-
-export type InspectionUpdateToOneWithWhereWithoutPredictionsInput = {
-  where?: Prisma.InspectionWhereInput
-  data: Prisma.XOR<Prisma.InspectionUpdateWithoutPredictionsInput, Prisma.InspectionUncheckedUpdateWithoutPredictionsInput>
-}
-
-export type InspectionUpdateWithoutPredictionsInput = {
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
-  user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
-}
-
-export type InspectionUncheckedUpdateWithoutPredictionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
-}
-
-export type InspectionCreateWithoutFeedbacksInput = {
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  company: Prisma.CompanyCreateNestedOneWithoutInspectionsInput
-  user?: Prisma.UserCreateNestedOneWithoutInspectionsInput
-  upload: Prisma.UploadCreateNestedOneWithoutInspectionsInput
-  model: Prisma.AIModelCreateNestedOneWithoutInspectionsInput
-  predictions?: Prisma.PredictionCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionUncheckedCreateWithoutFeedbacksInput = {
-  id?: number
-  companyId: number
-  userId?: number | null
-  uploadId: number
-  modelId: number
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-  predictions?: Prisma.PredictionUncheckedCreateNestedManyWithoutInspectionInput
-}
-
-export type InspectionCreateOrConnectWithoutFeedbacksInput = {
-  where: Prisma.InspectionWhereUniqueInput
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutFeedbacksInput, Prisma.InspectionUncheckedCreateWithoutFeedbacksInput>
-}
-
-export type InspectionUpsertWithoutFeedbacksInput = {
-  update: Prisma.XOR<Prisma.InspectionUpdateWithoutFeedbacksInput, Prisma.InspectionUncheckedUpdateWithoutFeedbacksInput>
-  create: Prisma.XOR<Prisma.InspectionCreateWithoutFeedbacksInput, Prisma.InspectionUncheckedCreateWithoutFeedbacksInput>
-  where?: Prisma.InspectionWhereInput
-}
-
-export type InspectionUpdateToOneWithWhereWithoutFeedbacksInput = {
-  where?: Prisma.InspectionWhereInput
-  data: Prisma.XOR<Prisma.InspectionUpdateWithoutFeedbacksInput, Prisma.InspectionUncheckedUpdateWithoutFeedbacksInput>
-}
-
-export type InspectionUpdateWithoutFeedbacksInput = {
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
-  user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-}
-
-export type InspectionUncheckedUpdateWithoutFeedbacksInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-}
-
 export type InspectionCreateManyCompanyInput = {
   id?: number
   userId?: number | null
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
@@ -1118,31 +786,24 @@ export type InspectionUpdateWithoutCompanyInput = {
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
+  upload?: Prisma.UploadUpdateOneWithoutInspectionsNestedInput
 }
 
 export type InspectionUncheckedUpdateWithoutCompanyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
 }
 
 export type InspectionUncheckedUpdateManyWithoutCompanyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1153,8 +814,7 @@ export type InspectionUncheckedUpdateManyWithoutCompanyInput = {
 export type InspectionCreateManyUserInput = {
   id?: number
   companyId: number
-  uploadId: number
-  modelId: number
+  uploadId?: number | null
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
@@ -1169,82 +829,24 @@ export type InspectionUpdateWithoutUserInput = {
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
+  upload?: Prisma.UploadUpdateOneWithoutInspectionsNestedInput
 }
 
 export type InspectionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
 }
 
 export type InspectionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type InspectionCreateManyModelInput = {
-  id?: number
-  companyId: number
-  userId?: number | null
-  uploadId: number
-  status: $Enums.InspectionStatus
-  resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: number | null
-  inferenceMs?: number | null
-  createdAt?: Date | string
-}
-
-export type InspectionUpdateWithoutModelInput = {
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
-  user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  upload?: Prisma.UploadUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
-}
-
-export type InspectionUncheckedUpdateWithoutModelInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
-  status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
-  resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
-}
-
-export type InspectionUncheckedUpdateManyWithoutModelInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  companyId?: Prisma.IntFieldUpdateOperationsInput | number
-  userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  uploadId?: Prisma.IntFieldUpdateOperationsInput | number
+  uploadId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1256,7 +858,6 @@ export type InspectionCreateManyUploadInput = {
   id?: number
   companyId: number
   userId?: number | null
-  modelId: number
   status: $Enums.InspectionStatus
   resultJson: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: number | null
@@ -1272,30 +873,23 @@ export type InspectionUpdateWithoutUploadInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutInspectionsNestedInput
   user?: Prisma.UserUpdateOneWithoutInspectionsNestedInput
-  model?: Prisma.AIModelUpdateOneRequiredWithoutInspectionsNestedInput
-  predictions?: Prisma.PredictionUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUpdateManyWithoutInspectionNestedInput
 }
 
 export type InspectionUncheckedUpdateWithoutUploadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   inferenceMs?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  predictions?: Prisma.PredictionUncheckedUpdateManyWithoutInspectionNestedInput
-  feedbacks?: Prisma.FeedbackUncheckedUpdateManyWithoutInspectionNestedInput
 }
 
 export type InspectionUncheckedUpdateManyWithoutUploadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  modelId?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumInspectionStatusFieldUpdateOperationsInput | $Enums.InspectionStatus
   resultJson?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   confidence?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
@@ -1303,44 +897,6 @@ export type InspectionUncheckedUpdateManyWithoutUploadInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type InspectionCountOutputType
- */
-
-export type InspectionCountOutputType = {
-  predictions: number
-  feedbacks: number
-}
-
-export type InspectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  predictions?: boolean | InspectionCountOutputTypeCountPredictionsArgs
-  feedbacks?: boolean | InspectionCountOutputTypeCountFeedbacksArgs
-}
-
-/**
- * InspectionCountOutputType without action
- */
-export type InspectionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InspectionCountOutputType
-   */
-  select?: Prisma.InspectionCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * InspectionCountOutputType without action
- */
-export type InspectionCountOutputTypeCountPredictionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PredictionWhereInput
-}
-
-/**
- * InspectionCountOutputType without action
- */
-export type InspectionCountOutputTypeCountFeedbacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedbackWhereInput
-}
 
 
 export type InspectionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1348,7 +904,6 @@ export type InspectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   companyId?: boolean
   userId?: boolean
   uploadId?: boolean
-  modelId?: boolean
   status?: boolean
   resultJson?: boolean
   confidence?: boolean
@@ -1356,11 +911,7 @@ export type InspectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   createdAt?: boolean
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
-  predictions?: boolean | Prisma.Inspection$predictionsArgs<ExtArgs>
-  feedbacks?: boolean | Prisma.Inspection$feedbacksArgs<ExtArgs>
-  _count?: boolean | Prisma.InspectionCountOutputTypeDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }, ExtArgs["result"]["inspection"]>
 
 export type InspectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1368,7 +919,6 @@ export type InspectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   companyId?: boolean
   userId?: boolean
   uploadId?: boolean
-  modelId?: boolean
   status?: boolean
   resultJson?: boolean
   confidence?: boolean
@@ -1376,8 +926,7 @@ export type InspectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }, ExtArgs["result"]["inspection"]>
 
 export type InspectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1385,7 +934,6 @@ export type InspectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   companyId?: boolean
   userId?: boolean
   uploadId?: boolean
-  modelId?: boolean
   status?: boolean
   resultJson?: boolean
   confidence?: boolean
@@ -1393,8 +941,7 @@ export type InspectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   createdAt?: boolean
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }, ExtArgs["result"]["inspection"]>
 
 export type InspectionSelectScalar = {
@@ -1402,7 +949,6 @@ export type InspectionSelectScalar = {
   companyId?: boolean
   userId?: boolean
   uploadId?: boolean
-  modelId?: boolean
   status?: boolean
   resultJson?: boolean
   confidence?: boolean
@@ -1410,27 +956,21 @@ export type InspectionSelectScalar = {
   createdAt?: boolean
 }
 
-export type InspectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyId" | "userId" | "uploadId" | "modelId" | "status" | "resultJson" | "confidence" | "inferenceMs" | "createdAt", ExtArgs["result"]["inspection"]>
+export type InspectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "companyId" | "userId" | "uploadId" | "status" | "resultJson" | "confidence" | "inferenceMs" | "createdAt", ExtArgs["result"]["inspection"]>
 export type InspectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
-  predictions?: boolean | Prisma.Inspection$predictionsArgs<ExtArgs>
-  feedbacks?: boolean | Prisma.Inspection$feedbacksArgs<ExtArgs>
-  _count?: boolean | Prisma.InspectionCountOutputTypeDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }
 export type InspectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }
 export type InspectionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Inspection$userArgs<ExtArgs>
-  upload?: boolean | Prisma.UploadDefaultArgs<ExtArgs>
-  model?: boolean | Prisma.AIModelDefaultArgs<ExtArgs>
+  upload?: boolean | Prisma.Inspection$uploadArgs<ExtArgs>
 }
 
 export type $InspectionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1438,17 +978,13 @@ export type $InspectionPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     company: Prisma.$CompanyPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
-    upload: Prisma.$UploadPayload<ExtArgs>
-    model: Prisma.$AIModelPayload<ExtArgs>
-    predictions: Prisma.$PredictionPayload<ExtArgs>[]
-    feedbacks: Prisma.$FeedbackPayload<ExtArgs>[]
+    upload: Prisma.$UploadPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     companyId: number
     userId: number | null
-    uploadId: number
-    modelId: number
+    uploadId: number | null
     status: $Enums.InspectionStatus
     resultJson: runtime.JsonValue
     confidence: number | null
@@ -1850,10 +1386,7 @@ export interface Prisma__InspectionClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.Inspection$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inspection$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  upload<T extends Prisma.UploadDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UploadDefaultArgs<ExtArgs>>): Prisma.Prisma__UploadClient<runtime.Types.Result.GetResult<Prisma.$UploadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  model<T extends Prisma.AIModelDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AIModelDefaultArgs<ExtArgs>>): Prisma.Prisma__AIModelClient<runtime.Types.Result.GetResult<Prisma.$AIModelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  predictions<T extends Prisma.Inspection$predictionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inspection$predictionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PredictionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  feedbacks<T extends Prisma.Inspection$feedbacksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inspection$feedbacksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  upload<T extends Prisma.Inspection$uploadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inspection$uploadArgs<ExtArgs>>): Prisma.Prisma__UploadClient<runtime.Types.Result.GetResult<Prisma.$UploadPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1887,7 +1420,6 @@ export interface InspectionFieldRefs {
   readonly companyId: Prisma.FieldRef<"Inspection", 'Int'>
   readonly userId: Prisma.FieldRef<"Inspection", 'Int'>
   readonly uploadId: Prisma.FieldRef<"Inspection", 'Int'>
-  readonly modelId: Prisma.FieldRef<"Inspection", 'Int'>
   readonly status: Prisma.FieldRef<"Inspection", 'InspectionStatus'>
   readonly resultJson: Prisma.FieldRef<"Inspection", 'Json'>
   readonly confidence: Prisma.FieldRef<"Inspection", 'Float'>
@@ -2308,51 +1840,22 @@ export type Inspection$userArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Inspection.predictions
+ * Inspection.upload
  */
-export type Inspection$predictionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Inspection$uploadArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Prediction
+   * Select specific fields to fetch from the Upload
    */
-  select?: Prisma.PredictionSelect<ExtArgs> | null
+  select?: Prisma.UploadSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Prediction
+   * Omit specific fields from the Upload
    */
-  omit?: Prisma.PredictionOmit<ExtArgs> | null
+  omit?: Prisma.UploadOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PredictionInclude<ExtArgs> | null
-  where?: Prisma.PredictionWhereInput
-  orderBy?: Prisma.PredictionOrderByWithRelationInput | Prisma.PredictionOrderByWithRelationInput[]
-  cursor?: Prisma.PredictionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PredictionScalarFieldEnum | Prisma.PredictionScalarFieldEnum[]
-}
-
-/**
- * Inspection.feedbacks
- */
-export type Inspection$feedbacksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Feedback
-   */
-  select?: Prisma.FeedbackSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Feedback
-   */
-  omit?: Prisma.FeedbackOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FeedbackInclude<ExtArgs> | null
-  where?: Prisma.FeedbackWhereInput
-  orderBy?: Prisma.FeedbackOrderByWithRelationInput | Prisma.FeedbackOrderByWithRelationInput[]
-  cursor?: Prisma.FeedbackWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FeedbackScalarFieldEnum | Prisma.FeedbackScalarFieldEnum[]
+  include?: Prisma.UploadInclude<ExtArgs> | null
+  where?: Prisma.UploadWhereInput
 }
 
 /**

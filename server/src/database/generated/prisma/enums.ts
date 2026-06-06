@@ -25,11 +25,3 @@ export const InspectionStatus = {
 } as const
 
 export type InspectionStatus = (typeof InspectionStatus)[keyof typeof InspectionStatus]
-
-
-export const FeedbackType = {
-  CORRECT: 'CORRECT',
-  INCORRECT: 'INCORRECT'
-} as const
-
-export type FeedbackType = (typeof FeedbackType)[keyof typeof FeedbackType]

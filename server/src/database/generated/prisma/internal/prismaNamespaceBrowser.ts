@@ -52,17 +52,10 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Plan: 'Plan',
-  PlanModule: 'PlanModule',
   Company: 'Company',
   User: 'User',
-  Module: 'Module',
-  CompanyModule: 'CompanyModule',
-  DatasetVersion: 'DatasetVersion',
-  AIModel: 'AIModel',
   Upload: 'Upload',
-  Inspection: 'Inspection',
-  Prediction: 'Prediction',
-  Feedback: 'Feedback'
+  Inspection: 'Inspection'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -93,15 +86,6 @@ export const PlanScalarFieldEnum = {
 export type PlanScalarFieldEnum = (typeof PlanScalarFieldEnum)[keyof typeof PlanScalarFieldEnum]
 
 
-export const PlanModuleScalarFieldEnum = {
-  id: 'id',
-  planId: 'planId',
-  moduleId: 'moduleId'
-} as const
-
-export type PlanModuleScalarFieldEnum = (typeof PlanModuleScalarFieldEnum)[keyof typeof PlanModuleScalarFieldEnum]
-
-
 export const CompanyScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -128,57 +112,6 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const ModuleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  description: 'description',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ModuleScalarFieldEnum = (typeof ModuleScalarFieldEnum)[keyof typeof ModuleScalarFieldEnum]
-
-
-export const CompanyModuleScalarFieldEnum = {
-  id: 'id',
-  companyId: 'companyId',
-  moduleId: 'moduleId',
-  active: 'active',
-  createdAt: 'createdAt'
-} as const
-
-export type CompanyModuleScalarFieldEnum = (typeof CompanyModuleScalarFieldEnum)[keyof typeof CompanyModuleScalarFieldEnum]
-
-
-export const DatasetVersionScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  version: 'version',
-  description: 'description',
-  companyId: 'companyId',
-  createdAt: 'createdAt'
-} as const
-
-export type DatasetVersionScalarFieldEnum = (typeof DatasetVersionScalarFieldEnum)[keyof typeof DatasetVersionScalarFieldEnum]
-
-
-export const AIModelScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  version: 'version',
-  provider: 'provider',
-  endpoint: 'endpoint',
-  apiKey: 'apiKey',
-  moduleId: 'moduleId',
-  companyId: 'companyId',
-  datasetId: 'datasetId',
-  createdAt: 'createdAt'
-} as const
-
-export type AIModelScalarFieldEnum = (typeof AIModelScalarFieldEnum)[keyof typeof AIModelScalarFieldEnum]
-
-
 export const UploadScalarFieldEnum = {
   id: 'id',
   url: 'url',
@@ -198,7 +131,6 @@ export const InspectionScalarFieldEnum = {
   companyId: 'companyId',
   userId: 'userId',
   uploadId: 'uploadId',
-  modelId: 'modelId',
   status: 'status',
   resultJson: 'resultJson',
   confidence: 'confidence',
@@ -207,32 +139,6 @@ export const InspectionScalarFieldEnum = {
 } as const
 
 export type InspectionScalarFieldEnum = (typeof InspectionScalarFieldEnum)[keyof typeof InspectionScalarFieldEnum]
-
-
-export const PredictionScalarFieldEnum = {
-  id: 'id',
-  inspectionId: 'inspectionId',
-  label: 'label',
-  confidence: 'confidence',
-  x: 'x',
-  y: 'y',
-  width: 'width',
-  height: 'height',
-  createdAt: 'createdAt'
-} as const
-
-export type PredictionScalarFieldEnum = (typeof PredictionScalarFieldEnum)[keyof typeof PredictionScalarFieldEnum]
-
-
-export const FeedbackScalarFieldEnum = {
-  id: 'id',
-  inspectionId: 'inspectionId',
-  type: 'type',
-  comment: 'comment',
-  createdAt: 'createdAt'
-} as const
-
-export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
 
 
 export const SortOrder = {

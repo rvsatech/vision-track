@@ -23,11 +23,6 @@ export * from './enums';
  */
 export type Plan = Prisma.PlanModel
 /**
- * Model PlanModule
- * 
- */
-export type PlanModule = Prisma.PlanModuleModel
-/**
  * Model Company
  * 
  */
@@ -38,26 +33,6 @@ export type Company = Prisma.CompanyModel
  */
 export type User = Prisma.UserModel
 /**
- * Model Module
- * 
- */
-export type Module = Prisma.ModuleModel
-/**
- * Model CompanyModule
- * 
- */
-export type CompanyModule = Prisma.CompanyModuleModel
-/**
- * Model DatasetVersion
- * 
- */
-export type DatasetVersion = Prisma.DatasetVersionModel
-/**
- * Model AIModel
- * 
- */
-export type AIModel = Prisma.AIModelModel
-/**
  * Model Upload
  * 
  */
@@ -67,13 +42,3 @@ export type Upload = Prisma.UploadModel
  * 
  */
 export type Inspection = Prisma.InspectionModel
-/**
- * Model Prediction
- * 
- */
-export type Prediction = Prisma.PredictionModel
-/**
- * Model Feedback
- * 
- */
-export type Feedback = Prisma.FeedbackModel

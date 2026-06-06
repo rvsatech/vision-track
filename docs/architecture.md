@@ -1,8 +1,6 @@
 # Vision Track — Architecture
 
-## 1. Overview
-Vision Track é uma plataforma SaaS de visão computacional para inspeção industrial.
-O sistema permite que empresas utilizem modelos de IA para detectar defeitos, riscos operacionais e validar processos através de imagens. O backend é construído de forma modular para permitir agilidade e futura escala.
+  nmnb;mnm      m
 
 ---
 

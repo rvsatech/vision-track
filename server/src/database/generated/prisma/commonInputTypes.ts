@@ -208,19 +208,6 @@ export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumRoleFilter<$PrismaModel>
 }
 
-export type BoolFilter<$PrismaModel = never> = {
-  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
-}
-
-export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedBoolFilter<$PrismaModel>
-  _max?: Prisma.NestedBoolFilter<$PrismaModel>
-}
-
 export type EnumInspectionStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.InspectionStatus | Prisma.EnumInspectionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.InspectionStatus[] | Prisma.ListEnumInspectionStatusFieldRefInput<$PrismaModel>
@@ -314,23 +301,6 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-}
-
-export type EnumFeedbackTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.FeedbackType | Prisma.EnumFeedbackTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel> | $Enums.FeedbackType
-}
-
-export type EnumFeedbackTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.FeedbackType | Prisma.EnumFeedbackTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFeedbackTypeWithAggregatesFilter<$PrismaModel> | $Enums.FeedbackType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel>
 }
 
 export type NestedIntFilter<$PrismaModel = never> = {
@@ -529,19 +499,6 @@ export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumRoleFilter<$PrismaModel>
 }
 
-export type NestedBoolFilter<$PrismaModel = never> = {
-  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
-}
-
-export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedBoolFilter<$PrismaModel>
-  _max?: Prisma.NestedBoolFilter<$PrismaModel>
-}
-
 export type NestedEnumInspectionStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.InspectionStatus | Prisma.EnumInspectionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.InspectionStatus[] | Prisma.ListEnumInspectionStatusFieldRefInput<$PrismaModel>
@@ -597,23 +554,6 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumFeedbackTypeFilter<$PrismaModel = never> = {
-  equals?: $Enums.FeedbackType | Prisma.EnumFeedbackTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel> | $Enums.FeedbackType
-}
-
-export type NestedEnumFeedbackTypeWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.FeedbackType | Prisma.EnumFeedbackTypeFieldRefInput<$PrismaModel>
-  in?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  notIn?: $Enums.FeedbackType[] | Prisma.ListEnumFeedbackTypeFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumFeedbackTypeWithAggregatesFilter<$PrismaModel> | $Enums.FeedbackType
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumFeedbackTypeFilter<$PrismaModel>
 }
 
 

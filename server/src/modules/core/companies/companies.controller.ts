@@ -9,10 +9,12 @@ import {
   Query,
   ParseIntPipe,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CompaniesService } from './companies.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
+
 import {
   ApiTags,
   ApiBearerAuth,
@@ -22,11 +24,21 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+
 import { CompanyEntity } from './entities/company.entity';
 import { PaginatedCompanyResponseDto } from './dto/company-response.dto';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+
+import { Role } from 'src/database/generated/prisma/client';
+
 @ApiTags('Companies')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
+@Roles(Role.SUPER_ADMIN)
+
 @Controller('companies')
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}

@@ -49,15 +49,25 @@ describe('AuthService', () => {
 
   it('should throw Unauthorized if user not found on login', async () => {
     mockPrismaService.user.findUnique.mockResolvedValue(null);
-    await expect(service.login({ email: 'test@test.com', password: 'abc' })).rejects.toThrow(UnauthorizedException);
+    await expect(
+      service.login({ email: 'test@test.com', password: 'abc' }),
+    ).rejects.toThrow(UnauthorizedException);
   });
 
   it('should login successfully', async () => {
-    const user = { id: 1, email: 'test@test.com', password: 'hashed', companyId: 1 };
+    const user = {
+      id: 1,
+      email: 'test@test.com',
+      password: 'hashed',
+      companyId: 1,
+    };
     mockPrismaService.user.findUnique.mockResolvedValue(user);
     (bcrypt.compare as jest.Mock).mockResolvedValue(true);
 
-    const result = await service.login({ email: 'test@test.com', password: 'abc' });
+    const result = await service.login({
+      email: 'test@test.com',
+      password: 'abc',
+    });
     expect(result.access_token).toBe('test_token');
     expect(result.user.email).toBe('test@test.com');
   });
@@ -68,7 +78,12 @@ describe('AuthService', () => {
     const newUser = { id: 1, email: 'new@test.com', password: 'hashed' };
     mockPrismaService.user.create.mockResolvedValue(newUser);
 
-    const result = await service.register({ email: 'new@test.com', password: 'abc', name: 'Test', companyId: 1 });
+    const result = await service.register({
+      email: 'new@test.com',
+      password: 'abc',
+      name: 'Test',
+      companyId: 1,
+    });
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...expected } = newUser;
     expect(result).toEqual(expected);

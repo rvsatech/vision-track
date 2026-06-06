@@ -1,10 +1,15 @@
 import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/user.decorator';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+  ApiBody,
+} from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -14,20 +19,13 @@ export class AuthController {
   @Post('login')
   @ApiOperation({ summary: 'Autenticar usuário e retornar o JWT' })
   @ApiBody({ type: LoginDto })
-  @ApiResponse({ status: 200, description: 'Login bem-sucedido e token retornado' })
+  @ApiResponse({
+    status: 200,
+    description: 'Login bem-sucedido e token retornado',
+  })
   @ApiResponse({ status: 401, description: 'Credenciais inválidas' })
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
-  }
-
-  @Post('register')
-  @ApiOperation({ summary: 'Registrar um novo usuário na plataforma' })
-  @ApiBody({ type: RegisterDto })
-  @ApiResponse({ status: 201, description: 'Usuário registrado com sucesso' })
-  @ApiResponse({ status: 400, description: 'Empresa não encontrada' })
-  @ApiResponse({ status: 409, description: 'E-mail já cadastrado' })
-  register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(registerDto);
   }
 
   @Get('me')

@@ -1,18 +1,16 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
-RUN corepack enable
+COPY package.json package-lock.json ./
 
-COPY package.json pnpm-lock.yaml ./
-
-RUN pnpm install --frozen-lockfile --ignore-scripts=false
+RUN npm ci
 
 COPY . .
 
-RUN pnpm prisma generate --schema=./prisma/schema.prisma
-RUN pnpm build
+RUN npx prisma generate
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "dist/src/main.js"]
+CMD ["node", "dist/main.js"]

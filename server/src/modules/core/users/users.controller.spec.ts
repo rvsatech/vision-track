@@ -26,7 +26,7 @@ describe('UsersController', () => {
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
-    service = module.get(UsersService) as any;
+    service = module.get(UsersService);
   });
 
   afterEach(() => {
@@ -34,8 +34,17 @@ describe('UsersController', () => {
   });
 
   it('should call create method', async () => {
-    const dto = { name: 'Test', email: 'test@test.com', password: 'abc', companyId: 1 };
-    service.create.mockResolvedValue({ id: 1, name: 'Test', email: 'test@test.com' });
+    const dto = {
+      name: 'Test',
+      email: 'test@test.com',
+      password: 'abc',
+      companyId: 1,
+    };
+    service.create.mockResolvedValue({
+      id: 1,
+      name: 'Test',
+      email: 'test@test.com',
+    });
 
     const result = await controller.create(dto as any);
     expect(service.create).toHaveBeenCalledWith(dto);

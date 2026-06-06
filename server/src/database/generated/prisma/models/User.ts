@@ -245,8 +245,8 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
-  inspections?: Prisma.InspectionListRelationFilter
   uploads?: Prisma.UploadListRelationFilter
+  inspections?: Prisma.InspectionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -259,8 +259,8 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   company?: Prisma.CompanyOrderByWithRelationInput
-  inspections?: Prisma.InspectionOrderByRelationAggregateInput
   uploads?: Prisma.UploadOrderByRelationAggregateInput
+  inspections?: Prisma.InspectionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -276,8 +276,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   company?: Prisma.XOR<Prisma.CompanyScalarRelationFilter, Prisma.CompanyWhereInput>
-  inspections?: Prisma.InspectionListRelationFilter
   uploads?: Prisma.UploadListRelationFilter
+  inspections?: Prisma.InspectionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -318,8 +318,8 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   company: Prisma.CompanyCreateNestedOneWithoutUsersInput
-  inspections?: Prisma.InspectionCreateNestedManyWithoutUserInput
   uploads?: Prisma.UploadCreateNestedManyWithoutUserInput
+  inspections?: Prisma.InspectionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -331,8 +331,8 @@ export type UserUncheckedCreateInput = {
   companyId: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutUserInput
+  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -343,8 +343,8 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUpdateOneRequiredWithoutUsersNestedInput
-  inspections?: Prisma.InspectionUpdateManyWithoutUserNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutUserNestedInput
+  inspections?: Prisma.InspectionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -356,8 +356,8 @@ export type UserUncheckedUpdateInput = {
   companyId?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutUserNestedInput
+  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -534,8 +534,8 @@ export type UserCreateWithoutCompanyInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
-  inspections?: Prisma.InspectionCreateNestedManyWithoutUserInput
   uploads?: Prisma.UploadCreateNestedManyWithoutUserInput
+  inspections?: Prisma.InspectionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCompanyInput = {
@@ -546,8 +546,8 @@ export type UserUncheckedCreateWithoutCompanyInput = {
   role?: $Enums.Role
   createdAt?: Date | string
   updatedAt?: Date | string
-  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutUserInput
+  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCompanyInput = {
@@ -731,8 +731,8 @@ export type UserUpdateWithoutCompanyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inspections?: Prisma.InspectionUpdateManyWithoutUserNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutUserNestedInput
+  inspections?: Prisma.InspectionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -743,8 +743,8 @@ export type UserUncheckedUpdateWithoutCompanyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutUserNestedInput
+  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCompanyInput = {
@@ -763,13 +763,13 @@ export type UserUncheckedUpdateManyWithoutCompanyInput = {
  */
 
 export type UserCountOutputType = {
-  inspections: number
   uploads: number
+  inspections: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  inspections?: boolean | UserCountOutputTypeCountInspectionsArgs
   uploads?: boolean | UserCountOutputTypeCountUploadsArgs
+  inspections?: boolean | UserCountOutputTypeCountInspectionsArgs
 }
 
 /**
@@ -785,15 +785,15 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountInspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InspectionWhereInput
+export type UserCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UploadWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UploadWhereInput
+export type UserCountOutputTypeCountInspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InspectionWhereInput
 }
 
 
@@ -807,8 +807,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
-  inspections?: boolean | Prisma.User$inspectionsArgs<ExtArgs>
   uploads?: boolean | Prisma.User$uploadsArgs<ExtArgs>
+  inspections?: boolean | Prisma.User$inspectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -850,8 +850,8 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "role" | "companyId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   company?: boolean | Prisma.CompanyDefaultArgs<ExtArgs>
-  inspections?: boolean | Prisma.User$inspectionsArgs<ExtArgs>
   uploads?: boolean | Prisma.User$uploadsArgs<ExtArgs>
+  inspections?: boolean | Prisma.User$inspectionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -865,8 +865,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     company: Prisma.$CompanyPayload<ExtArgs>
-    inspections: Prisma.$InspectionPayload<ExtArgs>[]
     uploads: Prisma.$UploadPayload<ExtArgs>[]
+    inspections: Prisma.$InspectionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1272,8 +1272,8 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   company<T extends Prisma.CompanyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyDefaultArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  inspections<T extends Prisma.User$inspectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploads<T extends Prisma.User$uploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inspections<T extends Prisma.User$inspectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1707,30 +1707,6 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.inspections
- */
-export type User$inspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Inspection
-   */
-  select?: Prisma.InspectionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Inspection
-   */
-  omit?: Prisma.InspectionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspectionInclude<ExtArgs> | null
-  where?: Prisma.InspectionWhereInput
-  orderBy?: Prisma.InspectionOrderByWithRelationInput | Prisma.InspectionOrderByWithRelationInput[]
-  cursor?: Prisma.InspectionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InspectionScalarFieldEnum | Prisma.InspectionScalarFieldEnum[]
-}
-
-/**
  * User.uploads
  */
 export type User$uploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1752,6 +1728,30 @@ export type User$uploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.UploadScalarFieldEnum | Prisma.UploadScalarFieldEnum[]
+}
+
+/**
+ * User.inspections
+ */
+export type User$inspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Inspection
+   */
+  select?: Prisma.InspectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Inspection
+   */
+  omit?: Prisma.InspectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InspectionInclude<ExtArgs> | null
+  where?: Prisma.InspectionWhereInput
+  orderBy?: Prisma.InspectionOrderByWithRelationInput | Prisma.InspectionOrderByWithRelationInput[]
+  cursor?: Prisma.InspectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InspectionScalarFieldEnum | Prisma.InspectionScalarFieldEnum[]
 }
 
 /**

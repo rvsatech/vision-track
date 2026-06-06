@@ -1,4 +1,9 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Role } from '../../../../database/generated/prisma/client';
 import { ROLES_KEY } from '../decorators/roles.decorator';
@@ -12,22 +17,24 @@ export class RolesGuard implements CanActivate {
       context.getHandler(),
       context.getClass(),
     ]);
-    
+
     if (!requiredRoles) {
       return true;
     }
-    
+
     const { user } = context.switchToHttp().getRequest();
-    
+
     if (!user || !user.role) {
       throw new ForbiddenException('Acesso negado: Usuário não autenticado.');
     }
 
     const hasRole = requiredRoles.includes(user.role);
     if (!hasRole) {
-      throw new ForbiddenException('Acesso negado: Perfil de acesso insuficiente.');
+      throw new ForbiddenException(
+        'Acesso negado: Perfil de acesso insuficiente.',
+      );
     }
-    
+
     return true;
   }
 }

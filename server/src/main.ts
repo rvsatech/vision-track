@@ -114,13 +114,15 @@ async function bootstrap() {
    * Nunca use origin "*" junto com credentials=true,
    * porque isso pode abrir brecha para sites maliciosos enviarem requests autenticados.
    */
-  const allowedOrigins =
-    process.env.CORS_ORIGIN?.split(',').map((o) => o.trim()) ?? [
-      'http://localhost:3000',
-    ];
+  const allowedOrigins = process.env.CORS_ORIGIN?.split(',').map((o) =>
+    o.trim(),
+  ) ?? ['http://localhost:3000'];
 
   app.enableCors({
-    origin: (origin: string, callback: (arg0: Error | null, arg1: boolean) => any) => {
+    origin: (
+      origin: string,
+      callback: (arg0: Error | null, arg1: boolean) => any,
+    ) => {
       // permite chamadas server-to-server (sem origin)
       if (!origin) return callback(null, true);
 

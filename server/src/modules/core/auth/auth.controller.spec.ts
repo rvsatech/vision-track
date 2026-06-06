@@ -14,7 +14,9 @@ describe('AuthController', () => {
           provide: AuthService,
           useValue: {
             login: jest.fn().mockResolvedValue({ access_token: 'test_token' }),
-            register: jest.fn().mockResolvedValue({ id: 1, email: 'test@test.com' }),
+            register: jest
+              .fn()
+              .mockResolvedValue({ id: 1, email: 'test@test.com' }),
           },
         },
       ],
@@ -35,7 +37,12 @@ describe('AuthController', () => {
   });
 
   it('should call register', async () => {
-    const dto = { email: 'test@test.com', password: 'abc', name: 'Test', companyId: 1 };
+    const dto = {
+      email: 'test@test.com',
+      password: 'abc',
+      name: 'Test',
+      companyId: 1,
+    };
     await controller.register(dto);
     expect(service.register).toHaveBeenCalledWith(dto);
   });

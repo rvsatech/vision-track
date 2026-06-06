@@ -38,7 +38,7 @@ describe('CompaniesService', () => {
     }).compile();
 
     service = module.get<CompaniesService>(CompaniesService);
-    prisma = module.get(PrismaService) as any;
+    prisma = module.get(PrismaService);
   });
 
   afterEach(() => {

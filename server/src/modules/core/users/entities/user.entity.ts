@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from 'src/database/generated/prisma/enums';
 
-
 export class UserEntity {
   @ApiProperty()
   id!: number;

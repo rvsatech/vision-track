@@ -27,7 +27,7 @@ services:
     build:
       context: ./server
     container_name: visiontrack-api
-
+    
     env_file:
       - .env
 

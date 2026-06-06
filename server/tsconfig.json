@@ -10,26 +10,18 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+
+    "paths": {
+      "@/*": ["src/*"],
+      "@prisma/*": ["prisma/*"],
+      "@generated/*": ["src/database/generated/*"]
+    }
   },
   "include": [
     "src/**/*",
     "src/database/prisma/**/*",
     "generated/**/*"
   ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ],
-  "paths": {
-    "@/*": [
-      "src/*"
-    ],
-    "@prisma/*": [
-      "prisma/*"
-    ],
-    "@generated/*": [
-      "generated/*"
-    ]
-  }
+  "exclude": ["node_modules", "dist"]
 }

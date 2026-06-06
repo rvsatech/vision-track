@@ -4,66 +4,79 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { PrismaService } from '../../../database/prisma/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from '@/modules/core/users/dto/create-user.dto';
+import { UpdateUserDto } from '@/modules/core/users/dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from '../../../database/prisma/prisma.service';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
+  // =========================
+  // UTIL
+  // =========================
   private excludePassword(user: any) {
     if (!user) return user;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    const { password, ...rest } = user;
+    return rest;
   }
 
+  // =========================
+  // CREATE USER (MVP SAFE)
+  // =========================
   async create(dto: CreateUserDto) {
-    const existing = await this.prisma.user.findUnique({
-      where: { email: dto.email },
-    });
-    if (existing) {
-      throw new ConflictException('Email already exists');
-    }
-
     const company = await this.prisma.company.findUnique({
       where: { id: dto.companyId },
     });
+
     if (!company) {
       throw new BadRequestException('Company not found');
+    }
+
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+
+    if (existingUser) {
+      throw new ConflictException('Email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
     const user = await this.prisma.user.create({
       data: {
-        ...dto,
+        name: dto.name,
+        email: dto.email,
         password: hashedPassword,
+        role: dto.role,
+        companyId: dto.companyId,
       },
     });
 
     return this.excludePassword(user);
   }
 
+  // =========================
+  // FIND ALL (SCOPED BY COMPANY)
+  // =========================
   async findAll(
+    companyId: number,
     page: number = 1,
     limit: number = 10,
     search?: string,
-    companyId?: number,
   ) {
     const skip = (page - 1) * limit;
-    const where: any = {};
+
+    const where: any = {
+      companyId, // 🔥 MVP MULTI-TENANT LOCK
+    };
 
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
         { email: { contains: search, mode: 'insensitive' } },
       ];
-    }
-    if (companyId) {
-      where.companyId = Number(companyId);
     }
 
     const [data, total] = await Promise.all([
@@ -76,7 +89,7 @@ export class UsersService {
     ]);
 
     return {
-      data: data.map(this.excludePassword),
+      data: data.map((u) => this.excludePassword(u)),
       meta: {
         total,
         page: Number(page),
@@ -86,9 +99,15 @@ export class UsersService {
     };
   }
 
-  async findOne(id: number) {
-    const user = await this.prisma.user.findUnique({
-      where: { id },
+  // =========================
+  // FIND ONE (SAFE SCOPED)
+  // =========================
+  async findOne(id: number, companyId: number) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id,
+        companyId,
+      },
     });
 
     if (!user) {
@@ -98,48 +117,54 @@ export class UsersService {
     return this.excludePassword(user);
   }
 
-  async update(id: number, dto: UpdateUserDto) {
-    await this.findOne(id); // Ensure exists
+  // =========================
+  // UPDATE (SCOPED)
+  // =========================
+  async update(id: number, companyId: number, dto: UpdateUserDto) {
+    await this.findOne(id, companyId);
 
     if (dto.email) {
-      const existing = await this.prisma.user.findUnique({
-        where: { email: dto.email },
+      const existing = await this.prisma.user.findFirst({
+        where: {
+          email: dto.email,
+          companyId,
+        },
       });
+
       if (existing && existing.id !== id) {
         throw new ConflictException('Email already exists');
       }
     }
 
-    if (dto.companyId) {
-      const company = await this.prisma.company.findUnique({
-        where: { id: dto.companyId },
-      });
-      if (!company) {
-        throw new BadRequestException('Company not found');
-      }
-    }
+    let password: string | undefined;
 
-    let password = dto.password;
-    if (password) {
-      password = await bcrypt.hash(password, 10);
+    if (dto.password) {
+      password = await bcrypt.hash(dto.password, 10);
     }
 
     const user = await this.prisma.user.update({
       where: { id },
       data: {
-        ...dto,
-        password,
+        name: dto.name,
+        email: dto.email,
+        role: dto.role,
+        password: password ?? undefined,
       },
     });
 
     return this.excludePassword(user);
   }
 
-  async remove(id: number) {
-    await this.findOne(id); // Ensure exists
+  // =========================
+  // REMOVE (SCOPED)
+  // =========================
+  async remove(id: number, companyId: number) {
+    await this.findOne(id, companyId);
+
     const user = await this.prisma.user.delete({
       where: { id },
     });
+
     return this.excludePassword(user);
   }
 }

@@ -230,11 +230,8 @@ export type CompanyWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   plan?: Prisma.XOR<Prisma.PlanNullableScalarRelationFilter, Prisma.PlanWhereInput> | null
   users?: Prisma.UserListRelationFilter
-  modules?: Prisma.CompanyModuleListRelationFilter
-  aiModels?: Prisma.AIModelListRelationFilter
   uploads?: Prisma.UploadListRelationFilter
   inspections?: Prisma.InspectionListRelationFilter
-  datasets?: Prisma.DatasetVersionListRelationFilter
 }
 
 export type CompanyOrderByWithRelationInput = {
@@ -246,11 +243,8 @@ export type CompanyOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   plan?: Prisma.PlanOrderByWithRelationInput
   users?: Prisma.UserOrderByRelationAggregateInput
-  modules?: Prisma.CompanyModuleOrderByRelationAggregateInput
-  aiModels?: Prisma.AIModelOrderByRelationAggregateInput
   uploads?: Prisma.UploadOrderByRelationAggregateInput
   inspections?: Prisma.InspectionOrderByRelationAggregateInput
-  datasets?: Prisma.DatasetVersionOrderByRelationAggregateInput
 }
 
 export type CompanyWhereUniqueInput = Prisma.AtLeast<{
@@ -265,11 +259,8 @@ export type CompanyWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Company"> | Date | string
   plan?: Prisma.XOR<Prisma.PlanNullableScalarRelationFilter, Prisma.PlanWhereInput> | null
   users?: Prisma.UserListRelationFilter
-  modules?: Prisma.CompanyModuleListRelationFilter
-  aiModels?: Prisma.AIModelListRelationFilter
   uploads?: Prisma.UploadListRelationFilter
   inspections?: Prisma.InspectionListRelationFilter
-  datasets?: Prisma.DatasetVersionListRelationFilter
 }, "id" | "cnpj">
 
 export type CompanyOrderByWithAggregationInput = {
@@ -305,11 +296,8 @@ export type CompanyCreateInput = {
   updatedAt?: Date | string
   plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
   users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateInput = {
@@ -320,11 +308,8 @@ export type CompanyUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUpdateInput = {
@@ -334,11 +319,8 @@ export type CompanyUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
   users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateInput = {
@@ -349,11 +331,8 @@ export type CompanyUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyInput = {
@@ -497,48 +476,6 @@ export type CompanyUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutUsersInput, Prisma.CompanyUpdateWithoutUsersInput>, Prisma.CompanyUncheckedUpdateWithoutUsersInput>
 }
 
-export type CompanyCreateNestedOneWithoutModulesInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutModulesInput, Prisma.CompanyUncheckedCreateWithoutModulesInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutModulesInput
-  connect?: Prisma.CompanyWhereUniqueInput
-}
-
-export type CompanyUpdateOneRequiredWithoutModulesNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutModulesInput, Prisma.CompanyUncheckedCreateWithoutModulesInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutModulesInput
-  upsert?: Prisma.CompanyUpsertWithoutModulesInput
-  connect?: Prisma.CompanyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutModulesInput, Prisma.CompanyUpdateWithoutModulesInput>, Prisma.CompanyUncheckedUpdateWithoutModulesInput>
-}
-
-export type CompanyCreateNestedOneWithoutDatasetsInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutDatasetsInput, Prisma.CompanyUncheckedCreateWithoutDatasetsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutDatasetsInput
-  connect?: Prisma.CompanyWhereUniqueInput
-}
-
-export type CompanyUpdateOneRequiredWithoutDatasetsNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutDatasetsInput, Prisma.CompanyUncheckedCreateWithoutDatasetsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutDatasetsInput
-  upsert?: Prisma.CompanyUpsertWithoutDatasetsInput
-  connect?: Prisma.CompanyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutDatasetsInput, Prisma.CompanyUpdateWithoutDatasetsInput>, Prisma.CompanyUncheckedUpdateWithoutDatasetsInput>
-}
-
-export type CompanyCreateNestedOneWithoutAiModelsInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutAiModelsInput, Prisma.CompanyUncheckedCreateWithoutAiModelsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutAiModelsInput
-  connect?: Prisma.CompanyWhereUniqueInput
-}
-
-export type CompanyUpdateOneRequiredWithoutAiModelsNestedInput = {
-  create?: Prisma.XOR<Prisma.CompanyCreateWithoutAiModelsInput, Prisma.CompanyUncheckedCreateWithoutAiModelsInput>
-  connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutAiModelsInput
-  upsert?: Prisma.CompanyUpsertWithoutAiModelsInput
-  connect?: Prisma.CompanyWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyUpdateToOneWithWhereWithoutAiModelsInput, Prisma.CompanyUpdateWithoutAiModelsInput>, Prisma.CompanyUncheckedUpdateWithoutAiModelsInput>
-}
-
 export type CompanyCreateNestedOneWithoutUploadsInput = {
   create?: Prisma.XOR<Prisma.CompanyCreateWithoutUploadsInput, Prisma.CompanyUncheckedCreateWithoutUploadsInput>
   connectOrCreate?: Prisma.CompanyCreateOrConnectWithoutUploadsInput
@@ -573,11 +510,8 @@ export type CompanyCreateWithoutPlanInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutPlanInput = {
@@ -587,11 +521,8 @@ export type CompanyUncheckedCreateWithoutPlanInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutPlanInput = {
@@ -638,11 +569,8 @@ export type CompanyCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutUsersInput = {
@@ -652,11 +580,8 @@ export type CompanyUncheckedCreateWithoutUsersInput = {
   planId?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutUsersInput = {
@@ -681,11 +606,8 @@ export type CompanyUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutUsersInput = {
@@ -695,221 +617,8 @@ export type CompanyUncheckedUpdateWithoutUsersInput = {
   planId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyCreateWithoutModulesInput = {
-  name: string
-  cnpj?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
-  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyUncheckedCreateWithoutModulesInput = {
-  id?: number
-  name: string
-  cnpj?: string | null
-  planId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyCreateOrConnectWithoutModulesInput = {
-  where: Prisma.CompanyWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutModulesInput, Prisma.CompanyUncheckedCreateWithoutModulesInput>
-}
-
-export type CompanyUpsertWithoutModulesInput = {
-  update: Prisma.XOR<Prisma.CompanyUpdateWithoutModulesInput, Prisma.CompanyUncheckedUpdateWithoutModulesInput>
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutModulesInput, Prisma.CompanyUncheckedCreateWithoutModulesInput>
-  where?: Prisma.CompanyWhereInput
-}
-
-export type CompanyUpdateToOneWithWhereWithoutModulesInput = {
-  where?: Prisma.CompanyWhereInput
-  data: Prisma.XOR<Prisma.CompanyUpdateWithoutModulesInput, Prisma.CompanyUncheckedUpdateWithoutModulesInput>
-}
-
-export type CompanyUpdateWithoutModulesInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
-  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyUncheckedUpdateWithoutModulesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  planId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyCreateWithoutDatasetsInput = {
-  name: string
-  cnpj?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
-  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyUncheckedCreateWithoutDatasetsInput = {
-  id?: number
-  name: string
-  cnpj?: string | null
-  planId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyCreateOrConnectWithoutDatasetsInput = {
-  where: Prisma.CompanyWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutDatasetsInput, Prisma.CompanyUncheckedCreateWithoutDatasetsInput>
-}
-
-export type CompanyUpsertWithoutDatasetsInput = {
-  update: Prisma.XOR<Prisma.CompanyUpdateWithoutDatasetsInput, Prisma.CompanyUncheckedUpdateWithoutDatasetsInput>
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutDatasetsInput, Prisma.CompanyUncheckedCreateWithoutDatasetsInput>
-  where?: Prisma.CompanyWhereInput
-}
-
-export type CompanyUpdateToOneWithWhereWithoutDatasetsInput = {
-  where?: Prisma.CompanyWhereInput
-  data: Prisma.XOR<Prisma.CompanyUpdateWithoutDatasetsInput, Prisma.CompanyUncheckedUpdateWithoutDatasetsInput>
-}
-
-export type CompanyUpdateWithoutDatasetsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
-  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyUncheckedUpdateWithoutDatasetsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  planId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyCreateWithoutAiModelsInput = {
-  name: string
-  cnpj?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
-  users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyUncheckedCreateWithoutAiModelsInput = {
-  id?: number
-  name: string
-  cnpj?: string | null
-  planId?: number | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
-  inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
-}
-
-export type CompanyCreateOrConnectWithoutAiModelsInput = {
-  where: Prisma.CompanyWhereUniqueInput
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutAiModelsInput, Prisma.CompanyUncheckedCreateWithoutAiModelsInput>
-}
-
-export type CompanyUpsertWithoutAiModelsInput = {
-  update: Prisma.XOR<Prisma.CompanyUpdateWithoutAiModelsInput, Prisma.CompanyUncheckedUpdateWithoutAiModelsInput>
-  create: Prisma.XOR<Prisma.CompanyCreateWithoutAiModelsInput, Prisma.CompanyUncheckedCreateWithoutAiModelsInput>
-  where?: Prisma.CompanyWhereInput
-}
-
-export type CompanyUpdateToOneWithWhereWithoutAiModelsInput = {
-  where?: Prisma.CompanyWhereInput
-  data: Prisma.XOR<Prisma.CompanyUpdateWithoutAiModelsInput, Prisma.CompanyUncheckedUpdateWithoutAiModelsInput>
-}
-
-export type CompanyUpdateWithoutAiModelsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
-  users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
-}
-
-export type CompanyUncheckedUpdateWithoutAiModelsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  cnpj?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  planId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
-  inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutUploadsInput = {
@@ -919,10 +628,7 @@ export type CompanyCreateWithoutUploadsInput = {
   updatedAt?: Date | string
   plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
   users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutUploadsInput = {
@@ -933,10 +639,7 @@ export type CompanyUncheckedCreateWithoutUploadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
   inspections?: Prisma.InspectionUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutUploadsInput = {
@@ -962,10 +665,7 @@ export type CompanyUpdateWithoutUploadsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
   users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutUploadsInput = {
@@ -976,10 +676,7 @@ export type CompanyUncheckedUpdateWithoutUploadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateWithoutInspectionsInput = {
@@ -989,10 +686,7 @@ export type CompanyCreateWithoutInspectionsInput = {
   updatedAt?: Date | string
   plan?: Prisma.PlanCreateNestedOneWithoutCompaniesInput
   users?: Prisma.UserCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyUncheckedCreateWithoutInspectionsInput = {
@@ -1003,10 +697,7 @@ export type CompanyUncheckedCreateWithoutInspectionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.UserUncheckedCreateNestedManyWithoutCompanyInput
-  modules?: Prisma.CompanyModuleUncheckedCreateNestedManyWithoutCompanyInput
-  aiModels?: Prisma.AIModelUncheckedCreateNestedManyWithoutCompanyInput
   uploads?: Prisma.UploadUncheckedCreateNestedManyWithoutCompanyInput
-  datasets?: Prisma.DatasetVersionUncheckedCreateNestedManyWithoutCompanyInput
 }
 
 export type CompanyCreateOrConnectWithoutInspectionsInput = {
@@ -1032,10 +723,7 @@ export type CompanyUpdateWithoutInspectionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   plan?: Prisma.PlanUpdateOneWithoutCompaniesNestedInput
   users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutInspectionsInput = {
@@ -1046,10 +734,7 @@ export type CompanyUncheckedUpdateWithoutInspectionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyCreateManyPlanInput = {
@@ -1066,11 +751,8 @@ export type CompanyUpdateWithoutPlanInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateWithoutPlanInput = {
@@ -1080,11 +762,8 @@ export type CompanyUncheckedUpdateWithoutPlanInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UserUncheckedUpdateManyWithoutCompanyNestedInput
-  modules?: Prisma.CompanyModuleUncheckedUpdateManyWithoutCompanyNestedInput
-  aiModels?: Prisma.AIModelUncheckedUpdateManyWithoutCompanyNestedInput
   uploads?: Prisma.UploadUncheckedUpdateManyWithoutCompanyNestedInput
   inspections?: Prisma.InspectionUncheckedUpdateManyWithoutCompanyNestedInput
-  datasets?: Prisma.DatasetVersionUncheckedUpdateManyWithoutCompanyNestedInput
 }
 
 export type CompanyUncheckedUpdateManyWithoutPlanInput = {
@@ -1102,20 +781,14 @@ export type CompanyUncheckedUpdateManyWithoutPlanInput = {
 
 export type CompanyCountOutputType = {
   users: number
-  modules: number
-  aiModels: number
   uploads: number
   inspections: number
-  datasets: number
 }
 
 export type CompanyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | CompanyCountOutputTypeCountUsersArgs
-  modules?: boolean | CompanyCountOutputTypeCountModulesArgs
-  aiModels?: boolean | CompanyCountOutputTypeCountAiModelsArgs
   uploads?: boolean | CompanyCountOutputTypeCountUploadsArgs
   inspections?: boolean | CompanyCountOutputTypeCountInspectionsArgs
-  datasets?: boolean | CompanyCountOutputTypeCountDatasetsArgs
 }
 
 /**
@@ -1138,20 +811,6 @@ export type CompanyCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.E
 /**
  * CompanyCountOutputType without action
  */
-export type CompanyCountOutputTypeCountModulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CompanyModuleWhereInput
-}
-
-/**
- * CompanyCountOutputType without action
- */
-export type CompanyCountOutputTypeCountAiModelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AIModelWhereInput
-}
-
-/**
- * CompanyCountOutputType without action
- */
 export type CompanyCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UploadWhereInput
 }
@@ -1161,13 +820,6 @@ export type CompanyCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types
  */
 export type CompanyCountOutputTypeCountInspectionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InspectionWhereInput
-}
-
-/**
- * CompanyCountOutputType without action
- */
-export type CompanyCountOutputTypeCountDatasetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DatasetVersionWhereInput
 }
 
 
@@ -1180,11 +832,8 @@ export type CompanySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   plan?: boolean | Prisma.Company$planArgs<ExtArgs>
   users?: boolean | Prisma.Company$usersArgs<ExtArgs>
-  modules?: boolean | Prisma.Company$modulesArgs<ExtArgs>
-  aiModels?: boolean | Prisma.Company$aiModelsArgs<ExtArgs>
   uploads?: boolean | Prisma.Company$uploadsArgs<ExtArgs>
   inspections?: boolean | Prisma.Company$inspectionsArgs<ExtArgs>
-  datasets?: boolean | Prisma.Company$datasetsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["company"]>
 
@@ -1221,11 +870,8 @@ export type CompanyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type CompanyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   plan?: boolean | Prisma.Company$planArgs<ExtArgs>
   users?: boolean | Prisma.Company$usersArgs<ExtArgs>
-  modules?: boolean | Prisma.Company$modulesArgs<ExtArgs>
-  aiModels?: boolean | Prisma.Company$aiModelsArgs<ExtArgs>
   uploads?: boolean | Prisma.Company$uploadsArgs<ExtArgs>
   inspections?: boolean | Prisma.Company$inspectionsArgs<ExtArgs>
-  datasets?: boolean | Prisma.Company$datasetsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1240,11 +886,8 @@ export type $CompanyPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     plan: Prisma.$PlanPayload<ExtArgs> | null
     users: Prisma.$UserPayload<ExtArgs>[]
-    modules: Prisma.$CompanyModulePayload<ExtArgs>[]
-    aiModels: Prisma.$AIModelPayload<ExtArgs>[]
     uploads: Prisma.$UploadPayload<ExtArgs>[]
     inspections: Prisma.$InspectionPayload<ExtArgs>[]
-    datasets: Prisma.$DatasetVersionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1649,11 +1292,8 @@ export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   plan<T extends Prisma.Company$planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$planArgs<ExtArgs>>): Prisma.Prisma__PlanClient<runtime.Types.Result.GetResult<Prisma.$PlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   users<T extends Prisma.Company$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  modules<T extends Prisma.Company$modulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$modulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyModulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  aiModels<T extends Prisma.Company$aiModelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$aiModelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AIModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploads<T extends Prisma.Company$uploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$uploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UploadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inspections<T extends Prisma.Company$inspectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$inspectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  datasets<T extends Prisma.Company$datasetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Company$datasetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DatasetVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2128,54 +1768,6 @@ export type Company$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Company.modules
- */
-export type Company$modulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CompanyModule
-   */
-  select?: Prisma.CompanyModuleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CompanyModule
-   */
-  omit?: Prisma.CompanyModuleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CompanyModuleInclude<ExtArgs> | null
-  where?: Prisma.CompanyModuleWhereInput
-  orderBy?: Prisma.CompanyModuleOrderByWithRelationInput | Prisma.CompanyModuleOrderByWithRelationInput[]
-  cursor?: Prisma.CompanyModuleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CompanyModuleScalarFieldEnum | Prisma.CompanyModuleScalarFieldEnum[]
-}
-
-/**
- * Company.aiModels
- */
-export type Company$aiModelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the AIModel
-   */
-  select?: Prisma.AIModelSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the AIModel
-   */
-  omit?: Prisma.AIModelOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AIModelInclude<ExtArgs> | null
-  where?: Prisma.AIModelWhereInput
-  orderBy?: Prisma.AIModelOrderByWithRelationInput | Prisma.AIModelOrderByWithRelationInput[]
-  cursor?: Prisma.AIModelWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AIModelScalarFieldEnum | Prisma.AIModelScalarFieldEnum[]
-}
-
-/**
  * Company.uploads
  */
 export type Company$uploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2221,30 +1813,6 @@ export type Company$inspectionsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.InspectionScalarFieldEnum | Prisma.InspectionScalarFieldEnum[]
-}
-
-/**
- * Company.datasets
- */
-export type Company$datasetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the DatasetVersion
-   */
-  select?: Prisma.DatasetVersionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the DatasetVersion
-   */
-  omit?: Prisma.DatasetVersionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DatasetVersionInclude<ExtArgs> | null
-  where?: Prisma.DatasetVersionWhereInput
-  orderBy?: Prisma.DatasetVersionOrderByWithRelationInput | Prisma.DatasetVersionOrderByWithRelationInput[]
-  cursor?: Prisma.DatasetVersionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DatasetVersionScalarFieldEnum | Prisma.DatasetVersionScalarFieldEnum[]
 }
 
 /**

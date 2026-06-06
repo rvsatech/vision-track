@@ -1,26 +1,59 @@
-import { Injectable } from '@nestjs/common';
-import { CreateInspectionDto } from './dto/create-inspection.dto';
-import { UpdateInspectionDto } from './dto/update-inspection.dto';
+import {
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
+import { CreateInspectionDto } from './dto/create-inspection.dto'
+import { InspectionStatus } from 'src/database/generated/prisma/client';
+import { PrismaService } from '@/database/prisma/prisma.service';
 
 @Injectable()
 export class InspectionsService {
-  create(createInspectionDto: CreateInspectionDto) {
-    return 'This action adds a new inspection';
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly http: HttpService,
+  ) {}
+
+  async create(createInspectionDto: CreateInspectionDto) {
+    const response = await this.http.axiosRef.post(
+      process.env.ROBOFLOW_URL!,
+      {
+        api_key: process.env.ROBOFLOW_API_KEY,
+        inputs: {
+          image: {
+            type: 'url',
+            value: createInspectionDto.imageUrl,
+          },
+        },
+      },
+    );
+
+    return this.prisma.inspection.create({
+      data: {
+        companyId: 1,
+        status: InspectionStatus.SUCCESS,
+        resultJson: response.data,
+      },
+    });
   }
 
   findAll() {
-    return `This action returns all inspections`;
+    return this.prisma.inspection.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} inspection`;
-  }
+  async findOne(id: number) {
+    const inspection = await this.prisma.inspection.findUnique({
+      where: { id },
+    });
 
-  update(id: number, updateInspectionDto: UpdateInspectionDto) {
-    return `This action updates a #${id} inspection`;
-  }
+    if (!inspection) {
+      throw new NotFoundException('Inspection not found');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} inspection`;
+    return inspection;
   }
 }

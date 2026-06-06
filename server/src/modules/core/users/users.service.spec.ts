@@ -1,12 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
-import { PrismaService } from '../../../database/prisma/prisma.service';
-import {
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { PrismaService } from '@/database/prisma/prisma.service';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Role } from '../../../database/generated/prisma/client';
+import { Role } from '@generated/prisma/client';
 
 jest.mock('bcrypt', () => ({
   hash: jest.fn().mockResolvedValue('hashedPassword'),
@@ -42,7 +39,7 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    prisma = module.get(PrismaService) as any;
+    prisma = module.get(PrismaService);
   });
 
   afterEach(() => {
@@ -52,7 +49,14 @@ describe('UsersService', () => {
   it('should create a user successfully', async () => {
     prisma.user.findUnique.mockResolvedValue(null);
     prisma.company.findUnique.mockResolvedValue({ id: 1 });
-    const newUser = { id: 1, name: 'Test', email: 'test@test.com', companyId: 1, role: Role.USER, password: 'hashedPassword' };
+    const newUser = {
+      id: 1,
+      name: 'Test',
+      email: 'test@test.com',
+      companyId: 1,
+      role: Role.USER,
+      password: 'hashedPassword',
+    };
     prisma.user.create.mockResolvedValue(newUser);
 
     const result = await service.create({
@@ -61,7 +65,7 @@ describe('UsersService', () => {
       password: 'password',
       companyId: 1,
     });
-    
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...expectedUser } = newUser;
     expect(result).toEqual(expectedUser);
@@ -72,9 +76,14 @@ describe('UsersService', () => {
   it('should throw ConflictException on create if email exists', async () => {
     prisma.user.findUnique.mockResolvedValue({ id: 1, email: 'test@test.com' });
 
-    await expect(service.create({ name: 'Test', email: 'test@test.com', password: 'password', companyId: 1 })).rejects.toThrow(
-      ConflictException,
-    );
+    await expect(
+      service.create({
+        name: 'Test',
+        email: 'test@test.com',
+        password: 'password',
+        companyId: 1,
+      }),
+    ).rejects.toThrow(ConflictException);
   });
 
   it('should find one user successfully', async () => {
@@ -104,9 +113,14 @@ describe('UsersService', () => {
   it('should throw ConflictException on update if email exists', async () => {
     const user = { id: 1, name: 'Test', email: 'old@test.com' };
     prisma.user.findUnique.mockResolvedValueOnce(user); // for findOne
-    prisma.user.findUnique.mockResolvedValueOnce({ id: 2, email: 'new@test.com' }); // for email check
-    
-    await expect(service.update(1, { email: 'new@test.com', name: 'Test' })).rejects.toThrow(ConflictException);
+    prisma.user.findUnique.mockResolvedValueOnce({
+      id: 2,
+      email: 'new@test.com',
+    }); // for email check
+
+    await expect(
+      service.update(1, { email: 'new@test.com', name: 'Test' }),
+    ).rejects.toThrow(ConflictException);
   });
 
   it('should remove a user successfully', async () => {

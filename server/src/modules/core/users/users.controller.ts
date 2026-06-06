@@ -10,9 +10,11 @@ import {
   ParseIntPipe,
   DefaultValuePipe,
 } from '@nestjs/common';
+
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+
 import {
   ApiTags,
   ApiBearerAuth,
@@ -22,6 +24,7 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+
 import { UserEntity } from './entities/user.entity';
 import { PaginatedUserResponseDto } from './dto/user-response.dto';
 
@@ -31,6 +34,9 @@ import { PaginatedUserResponseDto } from './dto/user-response.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // =========================
+  // CREATE USER
+  // =========================
   @Post()
   @ApiOperation({ summary: 'Create a new user' })
   @ApiBody({ type: CreateUserDto })
@@ -41,16 +47,18 @@ export class UsersController {
   })
   @ApiResponse({ status: 409, description: 'Email already exists' })
   @ApiResponse({ status: 400, description: 'Company not found' })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  create(@Body() dto: CreateUserDto) {
+    return this.usersService.create(dto);
   }
 
+  // =========================
+  // LIST USERS (SCOPED)
+  // =========================
   @Get()
   @ApiOperation({ summary: 'List all users with pagination' })
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'search', required: false, type: String })
-  @ApiQuery({ name: 'companyId', required: false, type: Number })
   @ApiResponse({
     status: 200,
     description: 'Return paginated users',
@@ -60,11 +68,15 @@ export class UsersController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('search') search?: string,
-    @Query('companyId') companyId?: number,
   ) {
-    return this.usersService.findAll(page, limit, search, companyId);
+    const companyId = 1; // 🔥 MVP: depois vira JWT
+
+    return this.usersService.findAll(companyId, page, limit, search);
   }
 
+  // =========================
+  // GET USER BY ID (SCOPED)
+  // =========================
   @Get(':id')
   @ApiOperation({ summary: 'Get a user by id' })
   @ApiParam({ name: 'id', type: Number })
@@ -75,9 +87,14 @@ export class UsersController {
   })
   @ApiResponse({ status: 404, description: 'User not found' })
   findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOne(id);
+    const companyId = 1;
+
+    return this.usersService.findOne(id, companyId);
   }
 
+  // =========================
+  // UPDATE USER (SCOPED)
+  // =========================
   @Patch(':id')
   @ApiOperation({ summary: 'Update a user' })
   @ApiParam({ name: 'id', type: Number })
@@ -92,17 +109,24 @@ export class UsersController {
   @ApiResponse({ status: 400, description: 'Company not found' })
   update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateUserDto: UpdateUserDto,
+    @Body() dto: UpdateUserDto,
   ) {
-    return this.usersService.update(id, updateUserDto);
+    const companyId = 1;
+
+    return this.usersService.update(id, companyId, dto);
   }
 
+  // =========================
+  // DELETE USER (SCOPED)
+  // =========================
   @Delete(':id')
   @ApiOperation({ summary: 'Remove a user' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, description: 'User removed successfully' })
   @ApiResponse({ status: 404, description: 'User not found' })
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.remove(id);
+    const companyId = 1;
+
+    return this.usersService.remove(id, companyId);
   }
 }

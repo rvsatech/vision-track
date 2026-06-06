@@ -9,15 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Plan'
-export type * from './models/PlanModule'
 export type * from './models/Company'
 export type * from './models/User'
-export type * from './models/Module'
-export type * from './models/CompanyModule'
-export type * from './models/DatasetVersion'
-export type * from './models/AIModel'
 export type * from './models/Upload'
 export type * from './models/Inspection'
-export type * from './models/Prediction'
-export type * from './models/Feedback'
 export type * from './commonInputTypes'
