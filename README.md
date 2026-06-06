@@ -2,99 +2,116 @@
 
 ## 🎯 O que é
 
-O **VisionTrack** é uma plataforma de **inspeção visual automatizada** que ajuda empresas a analisar imagens de produtos ou processos de forma rápida e confiável.
+O **VisionTrack** é uma plataforma SaaS de inspeção visual que utiliza **modelos de IA treinados (Roboflow)** para analisar imagens enviadas por usuários e retornar informações úteis automaticamente.
 
-Em uma frase:
-
-> *"O VisionTrack analisa imagens e ajuda empresas a tomar decisões com base em visão computacional."*
+O sistema já está funcional como MVP, com autenticação, multi-tenant, controle de permissões e integração com IA real.
 
 ---
 
-## 🧩 Qual problema ele resolve
+## 🧠 O que o sistema faz hoje
 
-Em muitas indústrias, a inspeção de produtos ainda é:
+O VisionTrack atualmente permite:
 
-- manual  
-- sujeita a erros humanos  
-- não padronizada  
-- sem histórico confiável
-
-O VisionTrack transforma esse processo ao:
-
-- automatizar a análise visual  
-- padronizar decisões  
-- gerar registros e histórico  
-- permitir auditorias e métricas
+- Autenticação com JWT
+- Controle de permissões (roles: USER, ADMIN, SUPER_ADMIN)
+- Multi-tenant (empresas isoladas)
+- Upload de imagens (via URL pública)
+- Criação de inspeções automáticas com IA
+- Retorno de análise baseada em modelo treinado no Roboflow
+- Histórico de inspeções por empresa
 
 ---
 
-## 🧠 Como funciona (de forma simples)
+## 🤖 Como a IA funciona
 
-O sistema organiza o trabalho em **Projetos de Inspeção**, cada um focado em um tipo específico de item ou processo.
+O sistema utiliza um modelo treinado no **Roboflow** para:
 
-**Exemplos de projetos:**
+- Identificar equipamentos de segurança em imagens
+- Retornar dados estruturados sobre a imagem
+- Gerar um resultado com:
+  - tipo de objeto detectado
+  - confiança (confidence score)
+  - informações adicionais em JSON
 
-- Inspeção de bobinas  
-- Inspeção de peças usinadas  
-- Inspeção de embalagens
+### Fluxo atual:
+## 🏗️ Arquitetura
 
-**Fluxo de uso:**
+Frontend (em desenvolvimento)
+↓
+NestJS API
+↓
+Prisma ORM
+↓
+PostgreSQL
+↓
+Roboflow API (IA)
 
-1. O usuário acessa a plataforma e escolhe um projeto de inspeção.  
-2. Envia uma imagem do produto via interface simples.  
-3. O sistema realiza a análise automaticamente.  
-4. Retorna um resultado claro: tipo de problema, score de confiança e destaques visuais.  
-5. O histórico fica salvo para auditorias futuras.
-
-> O usuário **não precisa entender de IA ou código**, apenas recebe decisões confiáveis.
-
----
-
-## 💡 Por que empresas usam
-
-- Redução de erros humanos  
-- Economia de material e tempo  
-- Processos padronizados  
-- Histórico e métricas confiáveis  
-- Decisões baseadas em dados
 
 ---
 
-## 🏗️ Conceito de Arquitetura
+## 📦 Módulos principais
 
-O VisionTrack integra três partes principais:
-
-```
-Frontend Web → API Backend → Serviço de Inferência ML → Banco de Dados
-```
-
-**Resumo:**
-
-- **Frontend:** interface intuitiva para envio e visualização de resultados  
-- **Backend:** processamento, armazenamento e lógica de negócios  
-- **Machine Learning:** análise automatizada das imagens  
-- **Banco de Dados:** armazenamento seguro e histórico de inspeções
-
----
-
-## 🤖 Inteligência Artificial
-
-O ML é usado para responder **"O que aparece nesta imagem?"**, de forma prática e aplicada:
-
-- Detecta defeitos ou padrões  
-- Funciona com poucos dados bem anotados  
-- Integração direta com o fluxo do projeto, sem complexidade para o usuário
+- Auth (JWT + roles)
+- Users (gestão por empresa)
+- Companies (multi-tenant SaaS)
+- Uploads (imagens via URL)
+- Inspections (resultados da IA)
+- Plans (estrutura SaaS)
 
 ---
 
 ## 🐳 Infraestrutura
 
-- Sistema **containerizado com Docker**  
-- Backend, frontend e banco rodando em containers separados  
-- Permite fácil escalabilidade e replicação do ambiente
+O projeto roda com Docker:
+
+- Backend NestJS containerizado
+- Banco PostgreSQL em container separado
+- Estrutura preparada para escalabilidade
 
 ---
 
-## 🔹 Resumo
+## 📊 Estado atual do produto
 
-O VisionTrack é pensado para empresas que querem **automatizar a inspeção visual**, reduzir erros, gerar histórico confiável e tomar decisões baseadas em dados, sem complicação.
+O VisionTrack já possui:
+
+- Backend SaaS funcional
+- Pipeline de IA integrado
+- Estrutura multi-tenant completa
+- Histórico de inspeções persistido
+- Autenticação e autorização
+
+---
+
+## 🚀 Próximos passos
+
+### Frontend
+- Dashboard de inspeções
+- Upload de imagens via interface
+- Visualização de resultados da IA
+- Gestão de empresas e usuários
+
+### Evolução de IA
+- Suporte a múltiplos modelos (diferentes tipos de inspeção)
+- Histórico comparativo de detecções
+- Melhor estrutura de versionamento de modelos
+
+### Uploads
+- Migração de URL pública → storage local (ou S3)
+- Processamento assíncrono de imagens
+
+---
+
+## 💡 Visão do produto
+
+O VisionTrack evolui como uma plataforma de inspeção visual baseada em IA, focada em:
+
+- automação de inspeções
+- redução de erro humano
+- histórico auditável de análises
+- suporte a múltiplos tipos de modelos de visão computacional
+
+---
+
+## 🔥 Resumo
+
+O VisionTrack já é um SaaS funcional com IA real integrada, multi-tenant e pronto para expansão de frontend, storage de imagens e novos modelos de inspeção.
